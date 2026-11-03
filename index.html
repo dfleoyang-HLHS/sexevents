@@ -126,8 +126,8 @@
     <p class="text-slate-600 mb-4">點擊標題展開學校現場實務要點。</p>
 
     <div class="mb-6">
-      <label for="lawSearch" class="sr-only">搜尋法規要點與 QA 問答</label>
-      <input id="lawSearch" type="search" placeholder="🔍 搜尋法規與 QA 問答，例如：通報、外聘、申復、和解、錄音…" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
+      <label for="lawSearch" class="sr-only">搜尋流程階段、法規要點與 QA 問答</label>
+      <input id="lawSearch" type="search" placeholder="🔍 搜尋流程、法規與 QA 問答，例如：通報、外聘、申復、和解、錄音…" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
       <p id="lawSearchHint" class="mt-2 text-sm text-slate-600" aria-live="polite" hidden></p>
     </div>
 
@@ -525,7 +525,7 @@ function renderStages(){
           <span class="${c[2]} ${c[1]} border ${c[3]} px-3 py-1 rounded-full text-sm font-semibold">⏰ 時效：${s.limit}</span>
         </div>
         <div class="grid sm:grid-cols-2 gap-3">
-          ${s.points.map(p=>`<div class="rounded-xl ${c[2]} p-4"><p class="font-semibold ${c[1]} mb-1">${p[0]}</p><p class="text-sm leading-relaxed">${p[1]}</p></div>`).join("")}
+          ${s.points.map(p=>`<div class="stage-pt rounded-xl ${c[2]} p-4 transition"><p class="font-semibold ${c[1]} mb-1">${p[0]}</p><p class="text-sm leading-relaxed">${p[1]}</p></div>`).join("")}
         </div>
         <div class="mt-4 text-xs text-slate-600"><p class="font-semibold mb-1">📎 依據附件法規：</p><div class="flex flex-col gap-1">${s.refs.map(k=>refLink(k,true)).join("")}</div></div>
         ${s.note?`<p class="mt-4 text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-4 py-3">📝 備註：${s.note}</p>`:""}
@@ -569,6 +569,7 @@ function renderStages(){
     $("#stageTabs").scrollIntoView({behavior:"smooth",block:"start"});
   }));
   select(0);
+  window.selectStage = select;
 }
 
 /* ============ 區塊二：Accordion ============ */
@@ -589,6 +590,8 @@ function accordion(law){
     </div></div>
   </div>`;
 }
+/* 比對時忽略空白（如「24 小時」與「24小時」視為相同） */
+const has = (text,q) => (text||"").replace(/\s+/g,"").includes((q||"").replace(/\s+/g,""));
 const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const para = t => esc(t).split("\n").map(l=>`<p class="mb-1">${l}</p>`).join("");
 function renderQA(){
@@ -613,7 +616,7 @@ function renderQA(){
     const c=$("#qaCat").value, k=$("#qaSearch").value.trim(); let n=0;
     document.querySelectorAll(".qa-group").forEach(g=>{
       let any=false;
-      g.querySelectorAll(".qa-card").forEach(card=>{const hit=(!c||g.dataset.cat===c)&&(!k||card.dataset.text.includes(k)); card.hidden=!hit; if(hit){any=true;n++;}});
+      g.querySelectorAll(".qa-card").forEach(card=>{const hit=(!c||g.dataset.cat===c)&&(!k||has(card.dataset.text,k)); card.hidden=!hit; if(hit){any=true;n++;}});
       g.hidden=!any;
     });
     $("#qaCount").textContent = `顯示 ${n} / ${QA_ALL.length} 題`;
@@ -637,13 +640,13 @@ function renderLaws(){
   $("#lawSearch").addEventListener("input",e=>{
     const q = e.target.value.trim();
     document.querySelectorAll(".law-card").forEach(card=>{
-      const hit = !q || card.dataset.text.includes(q);
+      const hit = !q || has(card.dataset.text,q);
       card.hidden = !hit;
       const btn = card.querySelector(".acc-btn");
       if(q && hit){ btn.setAttribute("aria-expanded","true"); document.getElementById(btn.getAttribute("aria-controls")).classList.add("open"); }
-      card.querySelectorAll(".item").forEach(it=>it.classList.toggle("bg-yellow-50", !!q && it.textContent.includes(q)));
+      card.querySelectorAll(".item").forEach(it=>it.classList.toggle("bg-yellow-50", !!q && has(it.textContent,q)));
     });
-    document.querySelectorAll(".law-row").forEach(r=>r.hidden = !!q && !r.dataset.text.includes(q));
+    document.querySelectorAll(".law-row").forEach(r=>r.hidden = !!q && !has(r.dataset.text,q));
     // 同步搜尋 QA 問答
     if(e.isTrusted) $("#qaCat").value = ""; $("#qaSearch").value = q;
     $("#qaSearch").dispatchEvent(new Event("input"));
@@ -652,7 +655,20 @@ function renderLaws(){
     const nQa = [...document.querySelectorAll(".qa-card")].filter(c=>!c.hidden).length;
     const hint = $("#lawSearchHint");
     hint.hidden = !q;
-    hint.innerHTML = q ? `「${esc(q)}」：法規卡片與對照表 <strong>${nLaw}</strong> 項、QA 問答 <strong>${nQa}</strong> 題` + (nQa?`　<a href="#qaCount" class="text-blue-700 underline">跳至 QA 結果 ↓</a>`:"") : "";
+    // 流程階段（第一區）：標示命中的要點卡片，並列出命中階段
+    const strip = t => (t||"").replace(/<[^>]+>/g,"");
+    const stageHits = [];
+    STAGES.forEach((st,i)=>{
+      const pts = document.querySelectorAll(`#panel-${st.id} .stage-pt`);
+      let n = 0;
+      st.points.forEach((pt,j)=>{ const hit = !!q && has(strip(pt[0]+pt[1]),q); if(hit) n++; pts[j] && pts[j].classList.toggle("ring-4", hit); pts[j] && pts[j].classList.toggle("ring-yellow-400", hit); });
+      if(q && has(strip(st.note)+strip(st.warn)+st.limit,q)) n++;
+      if(n) stageHits.push([i,n]);
+    });
+    const nStage = stageHits.reduce((a,x)=>a+x[1],0);
+    const stageBtns = stageHits.map(([i,n])=>`<button type="button" class="hint-stage ml-1 mb-1 px-2 py-0.5 rounded-full border border-blue-300 bg-white text-blue-800 text-xs hover:bg-blue-50" data-i="${i}">第${"一二三四五"[i]}階段・${n}</button>`).join("");
+    hint.innerHTML = q ? `「${esc(q)}」：流程階段 <strong>${nStage}</strong> 處${stageBtns?"（點選前往：":""}${stageBtns}${stageBtns?"）":""}、法規卡片與對照表 <strong>${nLaw}</strong> 項、QA 問答 <strong>${nQa}</strong> 題` + (nQa?`　<a href="#qaCount" class="text-blue-700 underline">跳至 QA 結果 ↓</a>`:"") : "";
+    hint.querySelectorAll(".hint-stage").forEach(b=>b.addEventListener("click",()=>{ window.selectStage(+b.dataset.i, true); $("#stageTabs").scrollIntoView({behavior:"smooth",block:"start"}); }));
   });
   // QA 區搜尋框反向同步至開頭搜尋框
   $("#qaSearch").addEventListener("input",e=>{ if(e.isTrusted){ $("#lawSearch").value = e.target.value; $("#lawSearch").dispatchEvent(new Event("input")); } });
