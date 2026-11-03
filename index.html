@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>校園性平導航系統</title>
+<title>校園性平事件處理與法規導航系統</title>
 <meta name="description" content="校園性平事件處理與法規導航系統：互動式處理流程、核心法規庫、實務檢核工具。">
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
 <style>
@@ -760,11 +760,20 @@ function initTools(){
     el.addEventListener("input",()=>{ store.set(el.id, el.value); renderChecklist(); });
     el.addEventListener("change",()=>{ store.set(el.id, el.value); renderChecklist(); });
   });
+  // 兩段式確認（部分嵌入環境不支援 confirm 對話框）
+  let resetArmed = null;
   $("#resetBtn").addEventListener("click",()=>{
-    if(!confirm("確定清除本機儲存的所有日期與勾選紀錄？")) return;
+    const btn = $("#resetBtn");
+    if(!resetArmed){
+      btn.textContent = "確定清除？再按一次";
+      resetArmed = setTimeout(()=>{ btn.textContent = "清除資料"; resetArmed = null; }, 4000);
+      return;
+    }
+    clearTimeout(resetArmed); resetArmed = null; btn.textContent = "已清除";
+    setTimeout(()=>{ btn.textContent = "清除資料"; }, 1500);
     store.clear(); document.querySelectorAll("[data-store]").forEach(el=>el.value = el.tagName==="SELECT"?"0":""); renderChecklist(); renderProc();
   });
-  $("#printBtn").addEventListener("click",()=>window.print());
+  if($("#printBtn")) $("#printBtn").addEventListener("click",()=>window.print());
   renderChecklist(); renderProc();
   setInterval(renderChecklist, 60000);
 }
