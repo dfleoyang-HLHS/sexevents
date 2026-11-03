@@ -28,6 +28,7 @@
     <nav aria-label="本頁導覽" class="flex flex-wrap gap-1 text-sm ml-auto">
       <a href="#scope" class="px-2 py-1 rounded hover:bg-white/10">適用判斷</a>
       <a href="#route" class="px-2 py-1 rounded hover:bg-white/10">申訴管道</a>
+      <a href="#moe" class="px-2 py-1 rounded hover:bg-white/10">教育部處理流程</a>
       <a href="#duty" class="px-2 py-1 rounded hover:bg-white/10">學校義務</a>
       <a href="#protect" class="px-2 py-1 rounded hover:bg-white/10">保護與責任</a>
       <a href="#check" class="px-2 py-1 rounded hover:bg-white/10">檢核清單</a>
@@ -40,11 +41,11 @@
 
   <section class="mb-10 rounded-2xl bg-gradient-to-br from-purple-900 to-purple-700 text-white p-6 sm:p-8 shadow">
     <h1 class="text-2xl sm:text-3xl font-bold mb-2">校園職場性騷擾處理指引</h1>
-    <p class="text-purple-100 max-w-3xl">雙方皆為教職員工（無學生）時，不屬性別平等教育法之校園性別事件，學校性平會不予受理，應依《性別平等工作法》及學校所訂職場性騷擾防治措施、申訴及懲戒規範處理（QA 第5題）。</p>
+    <p class="text-purple-100 max-w-3xl">雙方皆為教職員工（無學生）時，不屬性別平等教育法之校園性別事件，學校性平會不予受理，應依《性別平等工作法》、學校所訂職場性騷擾防治措施、申訴及懲戒規範，以及教育部 114 年 1 月 9 日臺教學（三）字第 1130122346 號函之申訴及處理流程說明辦理（QA 第5題）。</p>
     <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
       <div class="bg-white/10 rounded-xl p-3"><p class="text-xl font-bold">立即</p><p class="text-xs text-purple-100">知悉後糾正補救</p></div>
       <div class="bg-white/10 rounded-xl p-3"><p class="text-xl font-bold">通知</p><p class="text-xs text-purple-100">接獲申訴通知地方主管機關</p></div>
-      <div class="bg-white/10 rounded-xl p-3"><p class="text-xl font-bold">30 日</p><p class="text-xs text-purple-100">情節重大得不經預告終止契約</p></div>
+      <div class="bg-white/10 rounded-xl p-3"><p class="text-xl font-bold">2＋1 月</p><p class="text-xs text-purple-100">學校接獲申訴後結案（得延長 1 個月）</p></div>
       <div class="bg-white/10 rounded-xl p-3"><p class="text-xl font-bold">2／3 年</p><p class="text-xs text-purple-100">逕向地方主管機關申訴期限</p></div>
     </div>
   </section>
@@ -87,7 +88,8 @@
         <fieldset>
           <legend class="font-bold text-purple-950 mb-2">1. 被害人（申訴人）身分</legend>
           <div class="space-y-1 text-sm">
-            <label class="flex gap-2"><input type="radio" name="r_victim" value="public" class="mt-1 accent-purple-700">教育人員或公務人員（如教師、公立學校依法任用之職員）</label>
+            <label class="flex gap-2"><input type="radio" name="r_victim" value="edu" class="mt-1 accent-purple-700">教育人員（教師法適用對象：編制內專任教師、專業及技術科目教師、護理教師、校長）</label>
+            <label class="flex gap-2"><input type="radio" name="r_victim" value="civil" class="mt-1 accent-purple-700">公務人員（公立學校依法任用之職員）</label>
             <label class="flex gap-2"><input type="radio" name="r_victim" value="labor" class="mt-1 accent-purple-700">其他受僱者（如工友、約用人員、私立學校職員）</label>
           </div>
         </fieldset>
@@ -115,16 +117,65 @@
     </div>
   </section>
 
+  <!-- 教育部函 -->
+  <section id="moe" class="mb-12 scroll-mt-24" aria-labelledby="moe-t">
+    <h2 id="moe-t" class="text-2xl font-bold text-purple-950 mb-1">三、教育部處理流程（114 年 1 月 9 日函）</h2>
+    <p class="text-slate-600 mb-4">依附件「各級學校校長或教職員工涉職場性騷擾事件」申訴及處理流程說明整理。本函修正並停止適用教育部 102 年 12 月 24 日臺教學（三）字第 1020165630 號函。</p>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div class="rounded-xl bg-white border border-slate-200 p-5">
+        <p class="font-bold text-purple-900 mb-2">適用對象（二）</p>
+        <ul class="list-disc pl-5 text-sm space-y-1 text-slate-700">
+          <li><strong>教育人員</strong>（教師法適用或準用對象）：公立及已立案私立學校編制內、按月支給待遇並依法取得教師資格之專任教師；專業、技術科目教師及健康與護理課程之護理教師；各級學校校長。</li>
+          <li><strong>公務人員</strong>：參考「行政院所屬中央及地方機關公務人員職場性騷擾申訴處理作業流程指引」。</li>
+          <li><strong>其他人員</strong>：依性工法及工作場所性騷擾防治措施準則辦理。</li>
+        </ul>
+        <p class="text-sm text-slate-700 mt-2"><strong>雇主</strong>：學校。代表學校行使管理權或處理有關事務之人（如申訴人直屬主管、人事單位或受理性騷擾申訴單位）視同雇主，知悉即屬雇主知悉。</p>
+      </div>
+      <div class="rounded-xl bg-white border border-slate-200 p-5">
+        <p class="font-bold text-purple-900 mb-2">申訴處理單位（申調會）（五）</p>
+        <ul class="list-disc pl-5 text-sm space-y-1 text-slate-700">
+          <li>僱用教職員工 <strong>30 人以上</strong>：應另設申調會，應有具備性別意識之專業人士，女性成員比例不得低於 1/2（勞動部113年11月27日函予以尊重，以區隔性平會優先處理校園性別事件）。</li>
+          <li><strong>未達 30 人</strong>：得由雇主與教職員工代表共同組成申調會，並注意性別比例；考量偏鄉小校人力，<strong>得委託學校性平會</strong>依防治準則處理。</li>
+          <li><strong>100 人以上</strong>：除設申調會外，應組成申訴調查小組，成員應有具備性別意識之外部專業人士。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-5">
+      <p class="font-bold text-purple-900 mb-3">處理流程（六）</p>
+      <ol class="relative border-l-4 border-purple-200 ml-3 space-y-4">
+        <li class="ml-6"><span class="absolute -left-[14px] w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold ring-4 ring-white">1</span>
+          <p class="font-semibold">知悉並採取立即有效之糾正及補救措施</p>
+          <p class="text-sm text-slate-700">接獲申訴：考量申訴人意願採取適當隔離措施，不得對申訴人工作條件作不利變更；提供或轉介諮詢、醫療、心理諮商、社福資源；啟動調查；經證實惡意虛構者，亦對申訴人為適當處理。非因申訴知悉：訪談釐清、告知權益及救濟途徑並依意願協助申訴、適度調整工作內容或場所、依意願轉介服務。<strong>被害人無申訴意願時，仍應採取相同措施。</strong>僱用 500 人以上者，經請求應提供至少 2 次心理諮商協助。</p></li>
+        <li class="ml-6"><span class="absolute -left-[14px] w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold ring-4 ring-white">2</span>
+          <p class="font-semibold">校安通報</p>
+          <p class="text-sm text-slate-700">於校安通報網通報，類別為「其他事件－校務相關問題－教職員間之問題」（四）。</p></li>
+        <li class="ml-6"><span class="absolute -left-[14px] w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold ring-4 ring-white">3</span>
+          <p class="font-semibold">評估停止或調整職務、暫時停聘</p>
+          <p class="text-sm text-slate-700">校長：情節重大得由所屬主管機關停止職務。各級主管、具權勢地位者：情節重大得由所屬主管機關或服務學校停止或調整職務，並就其教師身分同時啟動暫時停聘。教師：知悉之日起 1 個月內經教評會審議，暫時停聘 6 個月以下，必要時延長 2 次、每次不逾 3 個月（教師法第22條第1項）；回復聘任者補發停聘期間本薪（教師法第25條第2項）。教師法等以外之教職員工：經性平會決議暫時停職（性平法第30條第6項）。停止或調整職務得由學校本權責發動，非必須經申調會決議。</p></li>
+        <li class="ml-6"><span class="absolute -left-[14px] w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold ring-4 ring-white">4</span>
+          <p class="font-semibold">通知地方主管機關，送申調會調查及審議</p>
+          <p class="text-sm text-slate-700">接獲申訴時通知被害人勞務提供地之直轄市、縣（市）主管機關，送申調會（或得委託性平會）調查審議，作成附理由之決議；<strong>自接獲申訴翌日起 2 個月內結案，必要時延長 1 個月</strong>並通知當事人；決議以書面通知申訴人及被申訴人。</p></li>
+        <li class="ml-6"><span class="absolute -left-[14px] w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold ring-4 ring-white">5</span>
+          <p class="font-semibold">懲處或適當處理，通知地方主管機關</p>
+          <p class="text-sm text-slate-700">依教師法、教育人員任用條例、公立高級中等以下學校教師／校長成績考核辦法、私立學校法及校內規章辦理，並將處理結果通知地方主管機關。懲處時應讓被害人對懲處程度有陳述意見之機會，並納入最終懲處決定之重要參考（附則（二））。</p></li>
+        <li class="ml-6"><span class="absolute -left-[14px] w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold ring-4 ring-white">6</span>
+          <p class="font-semibold">救濟</p>
+          <p class="text-sm text-slate-700">不服調查結果之決議：依教師法第42條提出申訴。不服懲處或處理決定：依教師法第42條提出申訴；如屬行政處分，亦得依訴願法提起訴願。學校延宕或消極不處理時，申訴人得向學校之主管機關反映（附則（四））。</p></li>
+      </ol>
+      <p class="mt-4 text-xs text-slate-500">📎 依據：教育部114年1月9日臺教學（三）字第1130122346號函附件「各級學校校長或教職員工涉職場性騷擾事件」申訴及處理流程說明。　<a class="underline text-purple-800" href="https://github.com/dfleoyang-HLHS/sexevents/blob/claude/gifted-newton-dnd4zn/attachments/14_%E6%95%99%E8%82%B2%E9%83%A81140109%E8%87%BA%E6%95%99%E5%AD%B8%28%E4%B8%89%29%E5%AD%97%E7%AC%AC1130122346%E8%99%9F%E5%87%BD_%E8%81%B7%E5%A0%B4%E6%80%A7%E9%A8%B7%E6%93%BE%E5%8F%8A%E6%80%A7%E9%A8%B7%E6%B3%95%E4%BA%8B%E4%BB%B6%E7%94%B3%E8%A8%B4%E8%99%95%E7%90%86%E6%B5%81%E7%A8%8B%E8%AA%AA%E6%98%8E.pdf" target="_blank" rel="noopener">📎 附件 PDF：教育部 114.01.09 函</a></p>
+    </div>
+  </section>
+
   <!-- 學校義務 -->
   <section id="duty" class="mb-12 scroll-mt-24" aria-labelledby="duty-t">
-    <h2 id="duty-t" class="text-2xl font-bold text-purple-950 mb-4">三、學校（雇主）的義務</h2>
+    <h2 id="duty-t" class="text-2xl font-bold text-purple-950 mb-4">四、學校（雇主）的義務</h2>
     <div class="grid md:grid-cols-3 gap-4">
       <div class="rounded-xl bg-white border border-slate-200 p-5">
         <p class="font-bold text-purple-900 mb-2">平時防治（第13條第1、6項）</p>
         <ul class="list-disc pl-5 text-sm space-y-1 text-slate-700">
           <li>僱用 10 人以上未達 30 人：訂定申訴管道，並在工作場所公開揭示。</li>
           <li>僱用 30 人以上：訂定性騷擾防治措施、申訴及懲戒規範，並公開揭示。</li>
-          <li>內容應包括性騷擾樣態、防治原則、教育訓練、申訴管道、申訴調查程序、申訴處理單位之基準與組成、懲戒處理等。</li>
+          <li>內容應包括性騷擾樣態、防治原則、教育訓練、申訴管道、申訴調查程序、申訴處理單位之基準與組成、懲戒處理等；並明定申訴人為教育人員時，依性工法第2條第3項及第32條之3辦理（教育部函三（二））。</li>
         </ul>
       </div>
       <div class="rounded-xl bg-white border border-slate-200 p-5">
@@ -165,7 +216,7 @@
 
   <!-- 保護與責任 -->
   <section id="protect" class="mb-12 scroll-mt-24" aria-labelledby="protect-t">
-    <h2 id="protect-t" class="text-2xl font-bold text-purple-950 mb-4">四、當事人保護與法律責任</h2>
+    <h2 id="protect-t" class="text-2xl font-bold text-purple-950 mb-4">五、當事人保護與法律責任</h2>
     <div class="grid md:grid-cols-3 gap-4">
       <div class="rounded-xl border-l-8 border-emerald-600 bg-emerald-50 p-5">
         <p class="font-bold text-emerald-800 mb-2">申訴人保護</p>
@@ -199,7 +250,7 @@
 
   <!-- 檢核清單 -->
   <section id="check" class="mb-12 scroll-mt-24" aria-labelledby="check-t">
-    <h2 id="check-t" class="text-2xl font-bold text-purple-950 mb-1">五、學校處理檢核清單</h2>
+    <h2 id="check-t" class="text-2xl font-bold text-purple-950 mb-1">六、學校處理檢核清單</h2>
     <p class="text-slate-600 mb-4">依附件條文整理，勾選結果僅儲存在本機瀏覽器。</p>
     <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-5">
       <div class="mb-3">
@@ -213,16 +264,16 @@
 
   <!-- 來源 -->
   <section id="src" class="mb-12 scroll-mt-24" aria-labelledby="src-t">
-    <h2 id="src-t" class="text-2xl font-bold text-purple-950 mb-3">六、法規來源與備註</h2>
+    <h2 id="src-t" class="text-2xl font-bold text-purple-950 mb-3">七、法規來源與備註</h2>
     <div class="rounded-xl border-l-8 border-purple-700 bg-purple-50 p-5 text-sm text-purple-950 leading-relaxed space-y-2">
-      <p>📎 內容依據附件：《性別平等工作法》（民國112年08月16日修正）；《性別平等教育法》第3條；校園性別事件防治與處理參考流程 Q&amp;A 第5題（1140120 更新修正）。</p>
+      <p>📎 內容依據附件：《性別平等工作法》（民國112年08月16日修正）；《性別平等教育法》第3條；校園性別事件防治與處理參考流程 Q&amp;A 第5題（1140120 更新修正）；教育部114年1月9日臺教學（三）字第1130122346號函及附件申訴及處理流程說明。</p>
       <p class="flex flex-wrap gap-x-4 gap-y-1">
         <a class="underline text-purple-800" href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030014" target="_blank" rel="noopener">🔗 《性別平等工作法》全國法規資料庫原文</a>
         <a class="underline text-purple-800" href="https://github.com/dfleoyang-HLHS/sexevents/blob/claude/gifted-newton-dnd4zn/attachments/04_%E6%80%A7%E5%88%A5%E5%B9%B3%E7%AD%89%E5%B7%A5%E4%BD%9C%E6%B3%95_1120816.pdf" target="_blank" rel="noopener">📎 附件 PDF：性別平等工作法</a>
+        <a class="underline text-purple-800" href="https://github.com/dfleoyang-HLHS/sexevents/blob/claude/gifted-newton-dnd4zn/attachments/14_%E6%95%99%E8%82%B2%E9%83%A81140109%E8%87%BA%E6%95%99%E5%AD%B8%28%E4%B8%89%29%E5%AD%97%E7%AC%AC1130122346%E8%99%9F%E5%87%BD_%E8%81%B7%E5%A0%B4%E6%80%A7%E9%A8%B7%E6%93%BE%E5%8F%8A%E6%80%A7%E9%A8%B7%E6%B3%95%E4%BA%8B%E4%BB%B6%E7%94%B3%E8%A8%B4%E8%99%95%E7%90%86%E6%B5%81%E7%A8%8B%E8%AA%AA%E6%98%8E.pdf" target="_blank" rel="noopener">📎 附件 PDF：教育部 114.01.09 函</a>
         <a class="underline text-purple-800" href="https://github.com/dfleoyang-HLHS/sexevents/blob/claude/gifted-newton-dnd4zn/attachments/10_QA%E6%89%8B%E5%86%8A%E9%99%84%E5%86%8A%E4%B8%80%E9%99%84%E9%8C%841_%E6%A0%A1%E5%9C%92%E6%80%A7%E5%88%A5%E4%BA%8B%E4%BB%B6%E9%98%B2%E6%B2%BB%E8%88%87%E8%99%95%E7%90%86%E5%8F%83%E8%80%83%E6%B5%81%E7%A8%8BQA_1140203.pdf" target="_blank" rel="noopener">📎 附件 PDF：QA 手冊</a>
       </p>
-      <p>⚠️ 備註：QA 第5題提及之教育部114年1月9日臺教學(三)字第1130122346號函（「各級學校校長或教職員工涉職場性騷擾事件」申訴及處理流程說明）未在附件中，本頁未納入其內容，請向主管機關查詢原文。</p>
-      <p>⚠️ 公務人員、教育人員之申訴、救濟及處理程序，依各該人事法令（如教師法、公務人員保障法）辦理（第2條第3項）；人事法令未在附件中，本頁僅列出性別平等工作法之規定。</p>
+      <p>⚠️ 備註：教育部函引用之教師法、工作場所性騷擾防治措施準則、性工法施行細則，以及「行政院所屬中央及地方機關公務人員職場性騷擾申訴處理作業流程指引」未在附件中，本頁依函文所載內容呈現，未另行核對各該法規原文。</p>
       <p>本頁為行政參考工具，不構成法律意見；正式處理時請以全國法規資料庫最新條文及主管機關函釋為準。</p>
     </div>
   </section>
@@ -246,25 +297,34 @@ function renderRoute(){
   }
   const items=[], notes=[];
   const it=(t,ref)=>items.push([t,ref]);
-  if(v==="public"){
+  if(v==="edu"){
     if(a==="head"){
-      it("被申訴人為校長（最高負責人）：應向上級機關（構）、所屬主管機關或監督機關申訴。","第32條之3第1項；第12條第8項第1款");
-      it("校長涉及性騷擾且情節重大，調查期間有必要時，得由上級機關或所屬主管機關停止或調整其職務；私立學校校長由學校所屬主管機關或服務學校為之。","第32條之3第2、3項");
-      it("最高負責人經認定有性騷擾者，由地方主管機關處 1 萬元以上 100 萬元以下罰鍰。","第38條之3；第38條之2第1項");
+      it("被申訴人為校長：應向學校所屬主管機關申訴。","性工法第32條之3第1項；教育部函附則（一）");
+      it("校長涉及性騷擾且情節重大，調查期間有先行停止職務之必要時，得由其所屬主管機關停止其職務；未認定為性騷擾或未予解聘者，得申請復職並補發停職期間本薪（年功薪）。","性工法第32條之3第2、4項；教育部函六（三）1");
     } else {
-      it("向學校依其性騷擾防治措施、申訴及懲戒規範所設之申訴管道提出申訴；學校應依第13條第2項採取立即有效之糾正及補救措施。","第13條");
-      if(a==="power") it("被申訴人具權勢地位且情節重大，調查期間有必要時，得暫時停止或調整其職務；公立學校各級主管得由上級機關、所屬主管機關或服務學校為之。","第13條之1第1項；第32條之3第2項");
+      it("學校（雇主）知悉即採取立即有效之糾正及補救措施；直屬主管、人事單位或受理申訴單位知悉，即屬雇主知悉。","性工法第13條第2項；教育部函六（一）（二）");
+      it("學校接獲申訴時，通知被害人勞務提供地之直轄市、縣（市）主管機關，並送交申調會（受僱者未達 30 人之學校得委託性平會）調查及審議，作成附理由之決議。","性工法第13條第4項；教育部函六（四）1");
+      it("自接獲申訴之翌日起 2 個月內結案；必要時得延長 1 個月，並通知當事人。決議以書面通知申訴人及被申訴人。","教育部函六（四）2、3");
+      if(a==="power") it("被申訴人為各級主管或具權勢地位且情節重大，調查期間有必要時，得由所屬主管機關或服務學校停止或調整其職務；並應就其教師身分同時啟動暫時停聘程序。","性工法第13條之1、第32條之3第2項；教育部函六（三）2、3、4（3）");
+      it("被申訴人為教師：服務學校應於知悉之日起 1 個月內經教評會審議通過後，免報主管機關核准，暫時予以停聘 6 個月以下並靜候調查；必要時得延長 2 次，每次不逾 3 個月。","教育部函六（三）4（1）引教師法第22條第1項");
+      it("性騷擾成立：依教師法、教育人員任用條例、成績考核辦法、私立學校法及校內規章懲處或適當處理，並將處理結果通知地方主管機關；懲處時應讓被害人對懲處程度有陳述意見之機會。","性工法第13條第4項；教育部函六（五）、附則（二）");
     }
-    it("申訴、救濟及處理程序依各該人事法令辦理（如教師依教師法、公務人員依公務人員保障法）。","第2條第3項");
-    notes.push("教育人員、公務人員不適用第32條之1（逕向地方主管機關申訴及其期限）、第32條之2、第38條之1等規定（第2條第2項）。");
-    if(unh) notes.push("不服學校處理結果時，請依各該人事法令提起申訴或救濟（第2條第3項）；人事法令未在附件中，請另行確認。");
+    it("救濟：不服調查結果之決議，依教師法第42條提出申訴；不服懲處或處理決定者亦同，該決定如屬行政處分，亦得提起訴願。","性工法第2條第3項；教育部函六（六）");
+    if(unh) it("學校延宕或消極不處理時，申訴人得向學校之主管機關反映，督促學校落實處理流程。","教育部函附則（四）");
+    notes.push("教育人員不適用性工法第32條之1（逕向地方主管機關申訴及其期限）、第32條之2、第38條之1等規定（性工法第2條第2項）。");
+  } else if(v==="civil"){
+    if(a==="head") it("被申訴人為校長（最高負責人）：應向上級機關（構）、所屬主管機關或監督機關申訴。","性工法第32條之3第1項");
+    else it("學校知悉即採取立即有效之糾正及補救措施，接獲申訴時通知地方主管機關。","性工法第13條第2、4項");
+    it("公務人員之申訴及處理，請參考「行政院所屬中央及地方機關公務人員職場性騷擾申訴處理作業流程指引」辦理；救濟依公務人員保障法。","教育部函二（二）；性工法第2條第3項");
+    notes.push("「行政院所屬中央及地方機關公務人員職場性騷擾申訴處理作業流程指引」未在附件中，請另行查詢原文。");
   } else {
     if(a==="head"){
       it("被申訴人為最高負責人或僱用人：得逕向地方主管機關提起申訴。","第32條之1第1項第1款");
       it("地方主管機關調查期間，申訴人得向雇主申請調整職務或工作型態至調查結果送達雇主之日起 30 日內，雇主不得拒絕。","第32條之2第5項");
       it("最高負責人或僱用人經認定有性騷擾者，處 1 萬元以上 100 萬元以下罰鍰。","第38條之2第1項");
     } else {
-      it("應向雇主（學校）提起申訴；學校應採取立即有效之糾正及補救措施，並通知地方主管機關。","第32條之1第1項；第13條第2、4項");
+      it("應向雇主（學校）提起申訴；學校應採取立即有效之糾正及補救措施，並通知地方主管機關。","性工法第32條之1第1項；第13條第2、4項");
+      it("依性工法及工作場所性騷擾防治措施準則辦理；學校送交申調會（受僱者未達 30 人得委託性平會）調查，自接獲申訴翌日起 2 個月內結案，必要時延長 1 個月。","教育部函二（三）、五、六（四）");
       if(a==="power") it("被申訴人具權勢地位且情節重大，調查期間有必要時，雇主得暫時停止或調整其職務。","第13條之1第1項");
       if(unh) it("學校未處理，或不服學校所為調查或懲戒結果：得逕向地方主管機關提起申訴。","第32條之1第1項第2款");
     }
@@ -279,9 +339,10 @@ function renderRoute(){
       notes.push("地方主管機關調查時，被申訴人無正當理由規避、妨礙、拒絕調查或提供資料者，處 1 萬元以上 5 萬元以下罰鍰，並得按次處罰（第38條之2第2項）。");
     }
   }
+  it("進行校安通報：其他事件－校務相關問題－教職員間之問題。","教育部函四（引教育部人事處100年3月1日函）");
   it("學校不得因申訴或協助他人申訴，而予以解僱、調職或其他不利之處分。","第36條");
   out.innerHTML = `<p class="font-bold text-purple-950 mb-3">申訴管道與處理重點</p>
-    <ol class="space-y-3">${items.map((x,i)=>`<li class="flex gap-3 text-sm"><span class="shrink-0 w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold">${i+1}</span><span class="min-w-0">${x[0]}<span class="block text-xs text-purple-800 mt-0.5">依據：性別平等工作法${x[1]}</span></span></li>`).join("")}</ol>
+    <ol class="space-y-3">${items.map((x,i)=>`<li class="flex gap-3 text-sm"><span class="shrink-0 w-6 h-6 rounded-full bg-purple-700 text-white grid place-items-center text-xs font-bold">${i+1}</span><span class="min-w-0">${x[0]}<span class="block text-xs text-purple-800 mt-0.5">依據：${x[1].startsWith("第")?"性工法"+x[1]:x[1]}</span></span></li>`).join("")}</ol>
     ${notes.length?`<div class="mt-4 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-xs text-amber-900 space-y-1">${notes.map(n=>`<p>⚠️ ${n}</p>`).join("")}</div>`:""}
     <p class="mt-4 text-xs text-slate-500">※ 依附件條文產生，供行政參考；個案適用請以法規原文及主管機關認定為準。</p>`;
 }
@@ -303,6 +364,11 @@ const WK = [
   ["知悉後已採取避免再度發生之措施（如調整工作內容或工作場所）","第13條第2項"],
   ["已提供或轉介諮詢、醫療或心理諮商、社會福利資源等服務","第13條第2項"],
   ["接獲申訴時已通知地方主管機關","第13條第4項"],
+  ["已完成校安通報（其他事件－校務相關問題－教職員間之問題）","｜教育部函四"],
+  ["已送交申調會（未達 30 人得委託性平會）調查及審議","｜教育部函五、六（四）"],
+  ["自接獲申訴翌日起 2 個月內結案（必要時延長 1 個月並通知當事人），決議以書面通知雙方","｜教育部函六（四）"],
+  ["被申訴人為教師：知悉 1 個月內經教評會審議暫時停聘（教師法第22條）","｜教育部函六（三）4"],
+  ["懲處前讓被害人對懲處程度陳述意見","｜教育部函附則（二）"],
   ["調查秉持客觀、公正、專業原則，給予雙方充分陳述及答辯機會，避免重複詢問","第13條第3項"],
   ["申訴處理單位人員有具備性別意識之專業人士","第13條第3項"],
   ["評估被申訴人是否具權勢地位且情節重大，有無暫時停止或調整職務之必要","第13條之1第1項；第32條之3"],
@@ -316,7 +382,7 @@ function renderWK(){
   let done=0;
   $("#wkList").innerHTML = WK.map((x,i)=>{const id="wk_"+i, on=store.get(id)==="1"; if(on) done++;
     return `<li class="py-2 flex items-start gap-3"><input type="checkbox" id="${id}" ${on?"checked":""} class="mt-1 w-5 h-5 accent-purple-700 shrink-0">
-      <label for="${id}" class="flex-1 min-w-0 cursor-pointer text-sm"><span class="${on?"line-through text-slate-400":""}">${x[0]}</span><span class="block text-xs text-purple-800 mt-0.5">性別平等工作法${x[1]}</span></label></li>`;}).join("");
+      <label for="${id}" class="flex-1 min-w-0 cursor-pointer text-sm"><span class="${on?"line-through text-slate-400":""}">${x[0]}</span><span class="block text-xs text-purple-800 mt-0.5">${x[1].startsWith("｜")?x[1].slice(1):"性別平等工作法"+x[1]}</span></label></li>`;}).join("");
   $("#wkFill").style.width = Math.round(done/WK.length*100)+"%";
   $("#wkText").textContent = `${done} / ${WK.length}`;
   WK.forEach((_,i)=>$("#wk_"+i).addEventListener("change",e=>{ store.set("wk_"+i,e.target.checked?"1":"0"); renderWK(); }));
