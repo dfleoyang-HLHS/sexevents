@@ -50,6 +50,10 @@
     <a href="#laws" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">②</span>核心法規庫</a>
     <a href="#tools" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">③</span>實務檢核工具</a>
     <a href="#sources" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">④</span>法規來源與備註</a>
+    <div class="pt-3 mt-3 border-t border-blue-800">
+      <p class="px-4 pb-1 text-xs text-blue-300">子網頁</p>
+      <a href="workplace.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">⑤</span>職場性騷擾（性工法）<span aria-hidden="true" class="ml-auto text-blue-300">→</span></a>
+    </div>
   </nav>
   <div class="px-6 py-4 text-xs text-blue-200 border-t border-blue-800 leading-relaxed">
     本系統為行政參考工具，不構成法律意見。實際處理請以<a class="underline" href="https://law.moj.gov.tw/" target="_blank" rel="noopener">全國法規資料庫</a>最新條文及主管機關函釋為準。
@@ -222,9 +226,9 @@
     <p class="text-sm text-slate-600 mb-3">收錄附件「校園性別事件防治與處理參考流程 Q&amp;A」（1020530 發布；1140120 更新修正；114 年 2 月 3 日結案版）全部 75 題，題號、分類與內容依原手冊。每題可展開「法規依據或補充說明」。</p>
     <div class="flex flex-col sm:flex-row gap-3 mb-3">
       <label for="qaCat" class="sr-only">問答分類</label>
-      <select id="qaCat" class="rounded-xl border border-slate-300 px-3 py-2 sm:w-72"></select>
+      <select id="qaCat" class="w-full min-w-0 rounded-xl border border-slate-300 px-3 py-2 sm:w-72"></select>
       <label for="qaSearch" class="sr-only">搜尋問答</label>
-      <input id="qaSearch" type="search" placeholder="🔍 搜尋問答，例如：和解、錄音、停聘、匿名…" class="flex-1 rounded-xl border border-slate-300 px-4 py-2 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
+      <input id="qaSearch" type="search" placeholder="🔍 搜尋問答，例如：和解、錄音、停聘、匿名…" class="w-full min-w-0 flex-1 rounded-xl border border-slate-300 px-4 py-2 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
     </div>
     <p id="qaCount" class="text-xs text-slate-500 mb-3" aria-live="polite"></p>
     <div id="qaList" class="space-y-6"></div>
@@ -376,12 +380,12 @@ const LAW_REF = {
 };
 function refLink(k, small){
   const r = LAW_REF[k];
-  const cls = `relative inline-flex items-center gap-1 text-blue-700 underline underline-offset-2 hover:text-blue-900 ${small?"text-xs":"text-sm"}`;
+  const cls = `relative inline text-blue-700 underline underline-offset-2 hover:text-blue-900 break-words ${small?"text-xs":"text-sm"}`;
   const pdfs = (PDF[k]||[]).map(f=>`<a href="${GH+encodeURIComponent(f)}" target="_blank" rel="noopener" class="${cls}">📎 附件 PDF：${f.replace(/^\d+_/,"").replace(/\.pdf$/,"")}<span class="sr-only">（另開新視窗）</span></a>`).join(" ");
   if(r.doc) return pdfs;
   const href = r.url || r.home || "https://law.moj.gov.tw/";
   const label = r.url ? `《${r.name}》全國法規資料庫原文` : (r.homeLabel || `全國法規資料庫（請搜尋「${r.name}」）`);
-  return `<span class="inline-flex flex-wrap gap-x-3 gap-y-1"><a href="${href}" target="_blank" rel="noopener" class="${cls}">🔗 ${label}<span class="sr-only">（另開新視窗）</span></a>${pdfs}</span>`;
+  return `<span class="inline-flex flex-wrap gap-x-3 gap-y-1 max-w-full min-w-0"><a href="${href}" target="_blank" rel="noopener" class="${cls}">🔗 ${label}<span class="sr-only">（另開新視窗）</span></a>${pdfs}</span>`;
 }
 function refNote(k){
   const r = LAW_REF[k];
@@ -956,6 +960,7 @@ function renderGuide(){
     add("accept","依學校所訂職場性騷擾防治措施、申訴及懲戒規範處理（教育部114年1月9日臺教學(三)字第1130122346號函）。","QA 第5題",[5]);
     add("after","公務人員、教育人員之申訴、救濟及處理程序，依各該人事法令之規定。","性別平等工作法第2條第3項",[]);
     warn.push("本處理器的校園性別事件流程不適用於本案，請改依性別平等工作法及學校職場性騷擾防治規範辦理。");
+    add("after",`申訴管道、期限與學校義務的完整說明，請見子網頁 <a href="workplace.html" class="underline text-purple-800 font-semibold">⑤ 職場性騷擾（性工法）</a>。`,"性別平等工作法第2、12、13、32條之1至第38條之4",[]);
   } else {
     verdict = ["非屬性平法之校園性別事件，依性騷擾防治法等處理","bg-pink-100 text-pink-900","行為人為校外人士，事件樣態非屬性平法適用範疇，性平會不予受理（QA 第7題）"];
     qa.add(7);
