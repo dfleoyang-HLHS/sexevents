@@ -48,6 +48,7 @@
     <a href="#flow" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">①</span>互動式處理流程</a>
     <a href="#laws" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">②</span>核心法規庫</a>
     <a href="#tools" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">③</span>實務檢核工具</a>
+    <a href="#sources" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">④</span>法規來源與備註</a>
   </nav>
   <div class="px-6 py-4 text-xs text-blue-200 border-t border-blue-800 leading-relaxed">
     本系統為行政參考工具，不構成法律意見。實際處理請以<a class="underline" href="https://law.moj.gov.tw/" target="_blank" rel="noopener">全國法規資料庫</a>最新條文及主管機關函釋為準。
@@ -100,7 +101,7 @@
       <table class="min-w-full text-sm">
         <caption class="sr-only">交叉適用法規對照表</caption>
         <thead class="bg-slate-100 text-slate-700">
-          <tr><th scope="col" class="text-left px-4 py-3">法規</th><th scope="col" class="text-left px-4 py-3">適用情境（標籤）</th><th scope="col" class="text-left px-4 py-3">學校實務重點</th></tr>
+          <tr><th scope="col" class="text-left px-4 py-3">法規</th><th scope="col" class="text-left px-4 py-3">適用情境（標籤）</th><th scope="col" class="text-left px-4 py-3">附件條文重點</th><th scope="col" class="text-left px-4 py-3">版本／原文</th></tr>
         </thead>
         <tbody id="crossTable" class="divide-y divide-slate-100"></tbody>
       </table>
@@ -140,6 +141,7 @@
           <li>心理諮商與輔導、法律、課業、經濟協助及社會福利資源轉介（準則第28條）。</li>
           <li>不得因申請調查或檢舉而給予不利處分（性平法第31條）。</li>
         </ul>
+        <p class="mt-3 text-xs">📎 依據：性平法第24、25、31條；準則第26–28條</p>
       </div>
     </div>
 
@@ -181,7 +183,30 @@
       </div>
 
       <ul id="checklist" class="divide-y divide-slate-100"></ul>
-      <p class="text-xs text-slate-500 mt-4">※ 期間計算採「始日不計入」原則（行政程序法第48條準用民法），期間末日為假日者依規定順延，本工具未自動順延，請自行確認。月份以曆月推算。</p>
+      <p class="text-xs text-slate-500 mt-4">※ 備註：性平法第33條第6項規定行政程序法有關規定於本法適用或準用；本工具期間計算採「始日不計入」、月份以曆月推算，末日遇假日之順延未自動處理（行政程序法非本系統附件，請自行確認）。</p>
+    </div>
+  </section>
+
+  <!-- ================= 來源與備註 ================= -->
+  <section id="sources" class="mb-16 scroll-mt-20" aria-labelledby="sources-title">
+    <h2 id="sources-title" class="text-2xl font-bold text-blue-950 mb-1">④ 法規來源與備註</h2>
+    <p class="text-slate-600 mb-4">本系統內容以下列附件法規原文為準，並標註條號；點選連結可查閱最新原文。</p>
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm mb-6">
+      <table class="min-w-full text-sm">
+        <caption class="sr-only">附件法規清單</caption>
+        <thead class="bg-slate-100 text-slate-700"><tr><th scope="col" class="text-left px-4 py-3">#</th><th scope="col" class="text-left px-4 py-3">法規名稱</th><th scope="col" class="text-left px-4 py-3">附件版本</th><th scope="col" class="text-left px-4 py-3">原文連結</th></tr></thead>
+        <tbody id="sourceTable" class="divide-y divide-slate-100"></tbody>
+      </table>
+    </div>
+    <div class="rounded-xl border-l-8 border-blue-600 bg-blue-50 p-5 text-sm text-blue-950 leading-relaxed">
+      <p class="font-bold mb-2">📝 使用備註</p>
+      <ol class="list-decimal pl-5 space-y-1">
+        <li>各要點後括號內之條號，均出自上表附件；未標條號之文字為整理說明。</li>
+        <li>標示「全國法規資料庫（請搜尋…）」者，表示尚未確認該法規之直接連結網址，請於資料庫首頁以法規名稱搜尋。</li>
+        <li>《校園性別事件調查專業人才庫設置及管理要點》未在附件中，相關內容僅依《校園性別事件防治準則》第22、23條整理。</li>
+        <li>「校安通報」「關懷E起來」為實務通報系統名稱，非附件法規條文用語。</li>
+        <li>法規可能於附件版本後再修正，正式處理時請以全國法規資料庫最新條文及主管機關函釋為準；本系統不構成法律意見。</li>
+      </ol>
     </div>
   </section>
 
@@ -192,18 +217,47 @@
 </main>
 
 <script>
+/* ============ 法規來源（以使用者提供之附件為準） ============ */
+const MOJ = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=";
+const LAW_REF = {
+  gee:  {name:"性別平等教育法", ver:"民國112年08月16日修正", url:MOJ+"H0080067"},
+  geer: {name:"性別平等教育法施行細則", ver:"民國113年02月15日修正", url:null},
+  rule: {name:"校園性別事件防治準則", ver:"民國113年03月06日修正", url:MOJ+"H0080069"},
+  gew:  {name:"性別平等工作法", ver:"民國112年08月16日修正", url:MOJ+"N0030014"},
+  sh:   {name:"性騷擾防治法", ver:"民國112年08月16日修正", url:null},
+  st:   {name:"跟蹤騷擾防制法", ver:"民國110年12月01日公布", url:null},
+  sa:   {name:"性侵害犯罪防治法", ver:"民國112年02月15日修正", url:MOJ+"D0080079"},
+  cy:   {name:"兒童及少年福利與權益保障法", ver:"民國110年01月20日修正", url:MOJ+"D0050001",
+         note:"附件版本為 110.01.20，引用前請至全國法規資料庫確認是否已有更新修正。"},
+  fine: {name:"教育部處理違反性別平等教育法事件處理程序及裁罰基準", ver:"行政院公報第30卷第219期（民國113年11月22日）", url:null, home:"https://gazette.nat.gov.tw/",
+         homeLabel:"行政院公報資訊網（請查詢第30卷第219期）"}
+};
+function refLink(k, small){
+  const r = LAW_REF[k];
+  const href = r.url || r.home || "https://law.moj.gov.tw/";
+  const label = r.url ? `《${r.name}》全國法規資料庫原文` : (r.homeLabel || `全國法規資料庫（請搜尋「${r.name}」）`);
+  return `<a href="${href}" target="_blank" rel="noopener" class="relative inline-flex items-center gap-1 text-blue-700 underline underline-offset-2 hover:text-blue-900 ${small?"text-xs":"text-sm"}">🔗 ${label}<span class="sr-only">（另開新視窗）</span></a>`;
+}
+function refNote(k){
+  const r = LAW_REF[k];
+  return `<div class="mt-4 rounded-lg bg-slate-50 border border-slate-200 px-4 py-3 text-xs text-slate-600 leading-relaxed">
+    <p>📎 <strong>內容依據附件：</strong>《${r.name}》${r.ver}</p>
+    ${r.note?`<p class="mt-1">⚠️ 備註：${r.note}</p>`:""}
+    <p class="mt-1">${refLink(k,true)}</p></div>`;
+}
+
 /* ============ 資料 ============ */
 const STAGES = [
-  { id:1, title:"通報與危機處理", limit:"知悉後 24 小時內", color:"red",
+  { id:1, title:"通報與危機處理", limit:"知悉後 24 小時內", color:"red", refs:["gee","rule","sa","cy"],
     points:[
-      ["校安通報","校長、教職員工知悉疑似校園性別事件，應立即通報學校權責人員，由權責人員向學校主管機關通報（校安通報），至遲不得超過 24 小時（性平法第22條第1項第1款）。"],
-      ["社政通報（關懷E起來）","依性侵害犯罪防治法、兒少法、身心障礙者權益保障法等規定，向當地直轄市、縣（市）社政主管機關通報，至遲不得超過 24 小時（性平法第22條第1項第2款）。"],
-      ["啟動緊急保護","確保被害人人身安全，必要時減低雙方互動機會、命行為人迴避、通知家長/監護人、轉介醫療及心理資源、協助報警（準則第26、27條）。"],
-      ["絕對禁止","❌ 任何人不得另設調查機制，違反者調查無效（性平法第22條第3項）；❌ 學校所屬人員不得以任何名義對案情進行瞭解或調查，且不得要求當事人提交自述或切結文件（準則第24條第7款）；❌ 不得私下和解或安排對質。"]
+      ["向學校主管機關通報","校長、教職員工知悉疑似校園性別事件，應立即通報學校防治規定所定權責人員，由權責人員向學校主管機關通報，至遲不得超過 24 小時（性平法第22條第1項第1款）。通報時當事人及檢舉人身分資料應予保密（準則第17條第1項）。"],
+      ["向社政主管機關通報","依性侵害犯罪防治法、兒少法、身心障礙者權益保障法及其他相關法律，向當地直轄市、縣（市）社政主管機關通報，至遲不得超過 24 小時（性平法第22條第1項第2款；性侵害犯罪防治法第11條；兒少法第53條）。"],
+      ["啟動保護與協助","依需求提供心理諮商與輔導，必要時提供保護措施、法律協助、社會福利資源轉介；對檢舉人有受侵害之虞者亦應提供保護（性平法第25條）。得減低雙方互動機會或命行為人迴避（準則第26條）；視身心狀況主動轉介相關機構（準則第27條）。"],
+      ["絕對禁止","❌ 任何人不得另設調查機制，違反者調查無效（性平法第22條第3項）；❌ 學校所屬人員不得以任何名義對案情進行瞭解或調查，且不得要求當事人提交自述或切結文件（準則第24條第7款）；❌ 書面通知應載明當事人不得私下聯繫或散布事件資訊（準則第24條第6款）。"]
     ],
-    warn:"延誤通報：學校校長、教師、職員或工友無正當理由未於24小時內通報，處新臺幣 3 萬元以上 15 萬元以下罰鍰（性平法第43條第1項第1款）。另行為人為校長或教職員工、二人以上被害人或行為人、涉及校園安全者，性平會應決議以檢舉案形式啟動調查（準則第18條第3項）；經媒體報導者視同檢舉（準則第20條）。"
+    note:"「校安通報」（教育部校安通報系統）及「關懷E起來」（社政通報系統）為實務上使用之通報系統名稱，附件法規條文用語為「向學校主管機關通報」與「向社政主管機關通報」。", warn:"延誤通報：學校校長、教師、職員或工友無正當理由未於24小時內通報，處新臺幣 3 萬元以上 15 萬元以下罰鍰（性平法第43條第1項第1款）。另行為人為校長或教職員工、二人以上被害人或行為人、涉及校園安全者，性平會應決議以檢舉案形式啟動調查（準則第18條第3項）；經媒體報導者視同檢舉（準則第20條）。"
   },
-  { id:2, title:"申請與受理審查", limit:"收件後 20 日內", color:"amber",
+  { id:2, title:"申請與受理審查", limit:"收件後 20 日內", color:"amber", refs:["gee","rule"],
     points:[
       ["收件單位","高級中等以下學校：學生事務處或教導處；專科以上學校：學生事務處或指定專責單位（準則第19條第1項）。得以書面、言詞或電子郵件申請，言詞或電郵應作成紀錄並經確認簽章（準則第18條）。"],
       ["3 日內移送","收件單位收件後，除有法定不受理事由外，應於 3 日內將事證資料交付性平會調查處理（性平法第33條第1項、準則第19條第2項）。不受理事由必要時得由性平會指派委員 3 人以上組成小組認定。"],
@@ -212,7 +266,7 @@ const STAGES = [
       ["管轄與移送","由行為人於行為發生時所屬學校（事件管轄學校）處理；行為人現為或曾為校長者，向行為時學校之主管機關申請。無管轄權者應於 7 個工作日內移送並通知當事人（準則第11、16條）。"]
     ]
   },
-  { id:3, title:"調查與審議", limit:"受理後 2 個月內（最長延長至 4 個月）", color:"blue",
+  { id:3, title:"調查與審議", limit:"受理後 2 個月內（最長延長至 4 個月）", color:"blue", refs:["gee","rule"],
     points:[
       ["組成調查小組","性平會得成立調查小組，以 3 人或 5 人為原則（準則第22條第1項）。※法規未明定組成調查小組之天數，應儘速組成以免影響 2 個月調查期限。"],
       ["組成比例","應具性別平等意識；女性不得少於 1/2；具校園性別事件調查專業素養之專家學者，於學校應占 1/3 以上（主管機關 1/2 以上）（性平法第33條第3項）。當事人分屬不同學校時，應有被害人現所屬學校之代表。"],
@@ -221,7 +275,7 @@ const STAGES = [
       ["期限","受理後 2 個月內完成調查；必要時得延長，以 2 次為限、每次不得逾 1 個月，並應通知申請人、被害人、檢舉人及行為人（性平法第36條第1項）。調查不受司法程序影響，亦不因行為人喪失原身分而中止。"]
     ]
   },
-  { id:4, title:"審議、懲處與處置", limit:"接獲調查報告後 2 個月內", color:"indigo",
+  { id:4, title:"審議、懲處與處置", limit:"接獲調查報告後 2 個月內", color:"indigo", refs:["gee","rule"],
     points:[
       ["性平會審議","調查完成後，性平會應將調查報告及處理建議以書面向學校提出（性平法第36條第2項）。建議改變身分者，應通知行為人限期提出書面陳述意見（準則第30條）。"],
       ["權責單位議處","學校應於接獲調查報告後 2 個月內，自行或移送相關權責機關（教評會／考績會／學生獎懲委員會等）議處（性平法第36條第3項）。權責單位不得要求性平會重新調查，亦不得自行調查；議處前應通知被害人陳述意見（準則第30條）。"],
@@ -229,7 +283,7 @@ const STAGES = [
       ["書面通知","處理結果以書面載明事實及理由，通知申請人、被害人、檢舉人及行為人，並一併提供調查報告、告知申復期限及受理單位（性平法第36條第3項、準則第32條）。"]
     ]
   },
-  { id:5, title:"救濟與申復", limit:"收到處理結果書面後 30 日內", color:"emerald",
+  { id:5, title:"救濟與申復", limit:"收到處理結果書面後 30 日內", color:"emerald", refs:["gee","rule"],
     points:[
       ["提出申復","申請人、被害人及行為人不服處理結果者，得於收到書面通知次日起 30 日內，以書面具明理由向學校申復，以 1 次為限（性平法第37條）。行為人為教職員工時，申請人或被害人得逕向主管機關申復。"],
       ["申復審議","專責單位收件後應即組成審議小組（3 或 5 人，女性 1/2 以上、專家學者 1/3 以上），於 30 日內作成附理由之決定；原性平會委員及原調查小組成員不得擔任審議小組成員（準則第32條第4項）。"],
@@ -240,7 +294,7 @@ const STAGES = [
 ];
 
 const CORE_LAWS = [
-  { name:"性別平等教育法", tag:"母法・112.08.16 修正",
+  { name:"《性別平等教育法》", tag:"母法・112.08.16 修正", refs:["gee"],
     items:[
       ["校園性別事件定義（第3條）","事件之一方為學校校長、教師、職員、工友或學生，他方為學生，且屬下列之一：（一）性侵害；（二）性騷擾；（三）性霸凌；（四）校長或教職員工違反與性或性別有關之專業倫理行為（與未成年學生發展親密關係，或利用不對等權勢關係發展有違專業倫理之關係）。"],
       ["性平會法定職掌（第6、9條）","統整資源擬訂實施計畫、規劃辦理性平教育活動、研發課程教學評量、研擬防治規定、調查及處理與本法有關之案件、規劃建立安全校園空間、推動社區家庭及社會教育。委員 5–21 人，校長為主任委員，女性應占 1/2 以上，每學期至少開會一次。"],
@@ -250,7 +304,7 @@ const CORE_LAWS = [
       ["懲罰性賠償（第42條）","行為人為校長或教職員工，學生因而受損害者，法院得酌定損害額 1–3 倍懲罰性賠償金；行為人為校長者 3–5 倍。"]
     ]
   },
-  { name:"校園性別事件防治準則", tag:"113.03.06 修正",
+  { name:"《校園性別事件防治準則》", tag:"113.03.06 修正", refs:["rule"],
     items:[
       ["師生專業倫理（第8條）","校長或教職員工與「未成年」學生，不得發展以性行為或情感為基礎等有違專業倫理之關係；與「成年」學生於有不對等權勢關係時亦不得發展。發現有違反之虞，應主動迴避並陳報學校或主管機關。"],
       ["調查小組組成（第22條、法第33條）","3 或 5 人為原則；女性 ≥ 1/2；專家學者（須經主管機關性平會核可納入人才庫）於學校 ≥ 1/3；行為人為校長或教職員工時全部外聘。曾經查證屬實違反性平相關法規者不得擔任成員。"],
@@ -260,7 +314,7 @@ const CORE_LAWS = [
       ["檔案保存（第34條）","事件檔案資料應指定專責單位或人員保存 25 年。"]
     ]
   },
-  { name:"性別平等教育法施行細則", tag:"113.02.15 修正",
+  { name:"《性別平等教育法施行細則》", tag:"113.02.15 修正", refs:["geer"],
     items:[
       ["性騷擾、性霸凌之認定（第2條）","應就個案審酌事件發生之背景、工作環境、當事人之關係、行為人之言詞、行為及相對人之認知等具體事實為之。"],
       ["安全校園空間（第9條）","應就空間配置、管理及保全、標示及求救系統與安全路線、盥洗及運動設施、照明及空間視覺穿透性等，考量無性別偏見、安全、友善及公平分配原則。"],
@@ -272,40 +326,47 @@ const CORE_LAWS = [
 ];
 
 const CROSS = [
-  ["性別平等工作法","職場・教職員工對等","本法於公務人員、教育人員亦適用（第2條第2項），教職員工於執行職務時遭受性騷擾依本法處理；學校（雇主）知悉時應採取立即有效之糾正及補救措施（第13條）。實習生於實習期間遭受性騷擾亦適用本法（第2條第5項、準則第7條）。","bg-purple-100 text-purple-800"],
-  ["性騷擾防治法","校外人士・非學生身分","行為人不具學生或教職員工身分（如校外人士）時適用；學校應協助被害人申訴、保全證據，必要時通知警察機關到場。申訴時行為人不明或無所屬單位時，向事件發生地警察機關提出。","bg-pink-100 text-pink-800"],
-  ["跟蹤騷擾防制法","持續性盯梢尾隨","對特定人「反覆或持續」違反意願且與性或性別有關之監視、跟蹤、盯梢、守候、尾隨、干擾、追求等行為，使之心生畏怖；由警察機關受理並核發書面告誡，二年內再犯得聲請保護令。","bg-orange-100 text-orange-800"],
-  ["性侵害犯罪防治法","強制啟動社政・司法","教育人員知有疑似性侵害犯罪情事，應立即向主管機關通報，至遲不得超過 24 小時；兒童或心智障礙被害人偵審中由專業人士協助詢問，減少重複陳述；媒體不得揭露被害人身分。","bg-red-100 text-red-800"],
-  ["兒童及少年福利與權益保障法","未滿18歲保護","未滿 18 歲之兒少遭受第49條各款行為等情形，教育人員應立即通報，至遲不得超過 24 小時；無正當理由未通報處 6 千元以上 6 萬元以下罰鍰（第100條）。","bg-sky-100 text-sky-800"]
+  ["性別平等工作法","職場・教職員工對等","本法於公務人員、教育人員及軍職人員亦適用（第2條第2項），其申訴、救濟及處理程序依各該人事法令（第2條第3項）。受僱者於執行職務時遭受性騷擾（第12條）；雇主知悉時應採取立即有效之糾正及補救措施（第13條第2項）。實習生於實習期間遭受性騷擾，適用本法（第2條第5項；準則第7條）。","bg-purple-100 text-purple-800","gew"],
+  ["性騷擾防治法","校外人士・非學生身分","依事件發生場域及當事人身分關係，性平教育法及性平工作法別有規定者，適用各該法律（第1條第2項）。學校於所屬場所有性騷擾事件發生當時知悉者，應協助被害人申訴及保全證據、必要時協助通知警察機關到場、檢討所屬場所安全（第7條第2項）。申訴時行為人不明或無所屬單位者，向事件發生地警察機關提出（第14條第3項第3款）。另性平教育法第45條規定，本法第10、25、26條於校園性別事件適用之。","bg-pink-100 text-pink-800","sh"],
+  ["跟蹤騷擾防制法","持續性盯梢尾隨","對特定人「反覆或持續」為違反其意願且與性或性別有關之監視跟蹤、盯梢尾隨、干擾、追求等八款行為，使之心生畏怖（第3條）。警察機關受理後應即調查，並得核發書面告誡（第4條）；告誡後二年內再犯，被害人得聲請保護令（第5條）。教育主管機關負責各級學校防制教育、被害人就學權益維護及輔導諮商（第2條第2項第4款）。","bg-orange-100 text-orange-800","st"],
+  ["性侵害犯罪防治法","強制啟動社政・司法","教育人員於執行職務時，知有疑似性侵害犯罪情事者，應立即向當地直轄市、縣（市）主管機關通報，至遲不得超過 24 小時，通報人身分應予保密（第11條）。媒體不得報導被害人身分（第16條）。兒童或心智障礙被害人於偵審中，必要時由專業人士在場協助詢（訊）問（第19條）。","bg-red-100 text-red-800","sa"],
+  ["兒童及少年福利與權益保障法","未滿18歲保護","兒童及少年指未滿 18 歲之人（第2條）。教育人員於執行業務時知悉兒少有第53條所列情形者，應立即向直轄市、縣（市）主管機關通報，至遲不得超過 24 小時（第53條）；無正當理由違反者，處新臺幣 6 千元以上 6 萬元以下罰鍰（第100條）。","bg-sky-100 text-sky-800","cy"]
 ];
 
 const GUIDES = [
-  { name:"教育部處理違反性別平等教育法事件處理程序及裁罰基準", tag:"裁罰基準（113.11.22）",
+  { name:"《教育部處理違反性別平等教育法事件處理程序及裁罰基準》", tag:"裁罰基準", refs:["fine"],
     items:[
-      ["適用範圍","教育部主管學校違反性平法之裁處；教育部知悉後得組成調查小組實地稽查、蒐證。"],
-      ["延誤通報裁罰級距","延誤未滿48小時：3 萬元｜48–未滿96小時：6 萬元｜96–未滿168小時：9 萬元｜168小時以上：12 萬元｜168小時以上且情節重大：15 萬元。"],
-      ["得從輕之情形","到校服務次日起 2 個月內發生延誤、延誤未滿 168 小時期間處理緊急事件，或已進行社政通報／已由其他單位介入處理者，得依最低額度（3 萬元）裁罰。"],
-      ["學校違規","未交由性平會調查或另設調查機制、未保密、揭露當事人身分、未對行為人追蹤輔導、對申請人不利處分等：1–15 萬元。"],
-      ["行為人不配合","無正當理由拒絕接受處置或規避、妨礙、拒絕配合調查：第 1 次 1 萬、第 2 次 3 萬、第 3 次以上每次 5 萬元，按次處罰至配合為止。"],
-      ["救濟","對裁處不服者，得自裁處書送達翌日起 30 日內提起訴願。"]
-    ]
+      ["適用範圍（第一、二點）","教育部為處理其主管學校違反性平法之事件所訂；教育部知悉涉嫌違反者，得組成調查小組實地稽查、蒐證。"],
+      ["延誤通報（項次1）","同一案件：延誤未滿48小時 3 萬元｜48小時以上未滿96小時 6 萬元｜96小時以上未滿168小時 9 萬元｜168小時以上 12 萬元｜168小時以上且情節重大 15 萬元。一年內二案件以上延誤通報24小時以上者，自第二案起每次 15 萬元。"],
+      ["得依最低額度裁罰（項次1）","到校服務次日起 2 個月內發生延誤；延誤未滿168小時且期間內處理通報分類之緊急事件；已進行社政通報或已由其他相關單位介入處理。"],
+      ["學校違規（項次3–8）","未交由性平會調查或另設調查機制、未保密、運用不對等權力影響被害人、揭露當事人身分、未對行為人追蹤輔導或無故公布其身分、對申請人或檢舉人不利處分：1 萬元以上 15 萬元以下。"],
+      ["行為人不配合（項次14、15）","無正當理由拒絕配合處置，或規避、妨礙、拒絕配合調查：第 1 次 1 萬元、第 2 次 3 萬元、第 3 次以上每次 5 萬元，按次處罰至配合為止。"],
+      ["從重從輕（第四點）","得審酌應受責難程度、對學生受教權等之影響、所得利益、資力，在法定額度內從重或從輕處罰並敘明理由。"],
+      ["救濟（裁處書注意事項）","對裁處不服者，得自裁處書送達翌日起 30 日內，繕具訴願書逕送教育部，由教育部函轉行政院提起訴願。"]
+    ],
+    note:"本基準適用於「教育部主管學校」；直轄市、縣（市）主管之學校，裁處依各該主管機關規定辦理。"
   },
-  { name:"校園性別事件調查專業人才庫設置及管理要點", tag:"人才庫",
+  { name:"校園性別事件調查專業人才庫", tag:"依準則第23條", refs:["rule"],
     items:[
-      ["用途","提供學校及主管機關遴聘具校園性別事件調查專業素養之專家學者，以符合調查小組「專家學者 1/3 以上」及「全部外聘」之需求。"],
-      ["實務提醒","遴聘前確認人才庫成員資格有效、無利害關係並完成迴避聲明。"]
-    ]
+      ["專家學者資格（準則第23條第1項）","符合下列之一：（一）持有中央或直轄市、縣（市）主管機關校園性別事件調查知能高階培訓結業證書，且經該主管機關性平會核可並納入調查專業人才庫者；（二）曾調查處理校園性別事件有具體績效，且經核可並納入人才庫者。"],
+      ["培訓課程（第2項）","性侵害、性騷擾、性霸凌、專業倫理基本概念及相關法規；性別平等意識；調查知能；處理程序及行政協調；懲處及救濟；其他性平會建議課程。"],
+      ["人才庫維護（第3、4項）","主管機關應定期培訓、建立並更新人才庫供學校延聘參考；經檢舉違反客觀、公正、專業原則致認定事實顯有偏頗，並經審查確認者，應自人才庫移除。"],
+      ["消極資格（準則第22條第2項）","違反刑法妨害性自主罪章、妨害性隱私及不實性影像罪章經緩起訴確定或有罪判決確定，或違反性平相關法規經查證屬實者，不得擔任調查小組成員。"]
+    ],
+    note:"《校園性別事件調查專業人才庫設置及管理要點》本身未在附件中，本卡片內容僅依《校園性別事件防治準則》第22、23條整理；要點細節請向主管機關查詢原文。"
   },
-  { name:"各校自訂之《校園性別事件防治規定》", tag:"校內規章",
+  { name:"各校自訂之《校園性別事件防治規定》", tag:"校內規章", refs:["gee","rule","geer"],
     items:[
-      ["法定義務","學校應依防治準則訂定防治規定並公告周知；未訂定者可處 1–10 萬元罰鍰。"],
-      ["內容建議","明定通報權責人員、受理窗口、聯絡方式、處理流程、保密規範、被害人協助措施與申復程序，並納入學生手冊及教職員工手冊。"]
+      ["法定義務（性平法第21條第2項）","學校應依防治準則訂定防治規定並公告周知；高級中等以上學校應訂定相關規定或專業倫理規範並公告周知。違反者學校處 1 萬元以上 10 萬元以下罰鍰（性平法第43條第3項）。"],
+      ["應納入聘約及學生手冊（準則第38條第1項）","準則第8條（專業倫理）及第9條（尊重性或身體自主）應納入校長及教職員工聘約及學生手冊。"],
+      ["應包括之事項（準則第38條第2項）","校園安全規劃；校內外教學與活動及人際互動注意事項；防治之政策宣示；事件之界定及樣態；申請調查或檢舉之收件單位、電話、電子郵件及程序；調查及處理程序；申復及救濟程序；禁止報復之警示；隱私之保密；其他防治相關事項。"],
+      ["公告方式（施行細則第10條）","除應張貼於學校公告欄外，並得以書面、口頭、網際網路或其他適當方式為之。"]
     ]
   }
 ];
 
 const CHECKS = [
-  { id:"c_report", label:"已完成通報（校安＋社政）", base:"d_know", add:{h:24}, rule:"知悉後 24 小時" },
+  { id:"c_report", label:"已完成通報（主管機關＋社政）", base:"d_know", add:{h:24}, rule:"知悉後 24 小時" },
   { id:"c_protect", label:"已啟動緊急保護與協助措施", base:"d_know", add:{h:24}, rule:"知悉後立即" },
   { id:"c_transfer", label:"已將申請/檢舉移送性平會", base:"d_recv", add:{d:3}, rule:"收件後 3 日" },
   { id:"c_accept", label:"已發出受理（或不受理）書面通知", base:"d_recv", add:{d:20}, rule:"收件後 20 日" },
@@ -350,6 +411,8 @@ function renderStages(){
         <div class="grid sm:grid-cols-2 gap-3">
           ${s.points.map(p=>`<div class="rounded-xl ${c[2]} p-4"><p class="font-semibold ${c[1]} mb-1">${p[0]}</p><p class="text-sm leading-relaxed">${p[1]}</p></div>`).join("")}
         </div>
+        <div class="mt-4 text-xs text-slate-600"><p class="font-semibold mb-1">📎 依據附件法規：</p><div class="flex flex-col gap-1">${s.refs.map(k=>refLink(k,true)).join("")}</div></div>
+        ${s.note?`<p class="mt-4 text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-4 py-3">📝 備註：${s.note}</p>`:""}
         ${s.warn?`<div role="alert" class="mt-4 rounded-xl bg-red-600 text-white p-4 text-sm font-medium">⚠️ ${s.warn}</div>`:""}
         <div class="mt-5 flex justify-between no-print">
           <button class="stage-prev px-4 py-2 rounded-lg border text-sm ${i===0?"invisible":""}" data-to="${i-1}">← 上一階段</button>
@@ -398,7 +461,7 @@ function accordion(law){
   const id = "acc"+(accId++);
   return `<div class="law-card rounded-xl bg-white border border-slate-200 shadow-sm" data-text="${(law.name+law.items.flat().join("")).replace(/"/g,"")}">
     <h4><button class="acc-btn w-full flex items-center justify-between gap-3 text-left px-5 py-4" aria-expanded="false" aria-controls="${id}">
-      <span class="flex flex-wrap items-center gap-2"><span class="font-bold text-blue-950">《${law.name}》</span>
+      <span class="flex flex-wrap items-center gap-2"><span class="font-bold text-blue-950">${law.name}</span>
       <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${law.tag}</span></span>
       <svg class="chev w-5 h-5 shrink-0 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
     </button></h4>
@@ -406,16 +469,18 @@ function accordion(law){
       <dl class="px-5 pb-5 space-y-3 border-t border-slate-100 pt-4">
         ${law.items.map(it=>`<div class="item"><dt class="font-semibold text-slate-900">▸ ${it[0]}</dt><dd class="text-sm text-slate-700 leading-relaxed pl-4">${it[1]}</dd></div>`).join("")}
       </dl>
+      <div class="px-5 pb-5">${(law.refs||[]).map(refNote).join("")}${law.note?`<p class="mt-3 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">⚠️ 備註：${law.note}</p>`:""}</div>
     </div></div>
   </div>`;
 }
 function renderLaws(){
   $("#coreLaws").innerHTML = CORE_LAWS.map(accordion).join("");
   $("#guideLaws").innerHTML = GUIDES.map(accordion).join("");
-  $("#crossTable").innerHTML = CROSS.map(r=>`<tr class="law-row align-top" data-text="${r.join("")}">
+  $("#crossTable").innerHTML = CROSS.map(r=>`<tr class="law-row align-top" data-text="${r.slice(0,3).join("")}">
     <th scope="row" class="text-left px-4 py-3 font-semibold text-blue-950 whitespace-nowrap">《${r[0]}》</th>
     <td class="px-4 py-3"><span class="inline-block ${r[3]} px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap">${r[1]}</span></td>
-    <td class="px-4 py-3 text-slate-700 leading-relaxed min-w-[16rem]">${r[2]}</td></tr>`).join("");
+    <td class="px-4 py-3 text-slate-700 leading-relaxed min-w-[16rem]">${r[2]}</td>
+    <td class="px-4 py-3 text-xs text-slate-600 min-w-[10rem]"><p class="mb-1">${LAW_REF[r[4]].ver}</p>${refLink(r[4],true)}</td></tr>`).join("");
   document.querySelectorAll(".acc-btn").forEach(b=>b.addEventListener("click",()=>{
     const open = b.getAttribute("aria-expanded")!=="true";
     b.setAttribute("aria-expanded",open);
@@ -511,10 +576,17 @@ function initNav(){
   const io = new IntersectionObserver(es=>es.forEach(en=>{
     if(en.isIntersecting) links.forEach(l=>{ const on = l.getAttribute("href")==="#"+en.target.id; l.classList.toggle("bg-blue-700",on); on?l.setAttribute("aria-current","true"):l.removeAttribute("aria-current"); });
   }),{rootMargin:"-40% 0px -55% 0px"});
-  ["flow","laws","tools"].forEach(id=>io.observe(document.getElementById(id)));
+  ["flow","laws","tools","sources"].forEach(id=>io.observe(document.getElementById(id)));
 }
 
-renderStages(); renderLaws(); initTools(); initNav();
+function renderSources(){
+  $("#sourceTable").innerHTML = Object.keys(LAW_REF).map((k,i)=>{const r=LAW_REF[k];return `<tr class="align-top">
+    <td class="px-4 py-3 text-slate-500">${i+1}</td>
+    <th scope="row" class="text-left px-4 py-3 font-semibold text-blue-950">《${r.name}》${r.note?`<p class="font-normal text-xs text-amber-800 mt-1">⚠️ ${r.note}</p>`:""}</th>
+    <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${r.ver}</td>
+    <td class="px-4 py-3 min-w-[12rem]">${refLink(k,true)}</td></tr>`;}).join("");
+}
+renderSources(); renderStages(); renderLaws(); initTools(); initNav();
 </script>
 </body>
 </html>
