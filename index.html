@@ -45,6 +45,7 @@
     </div>
   </div>
   <nav class="flex-1 px-3 py-4 space-y-1">
+    <a href="#guide" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">⓪</span>引導處理器</a>
     <a href="#flow" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">①</span>互動式處理流程</a>
     <a href="#laws" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">②</span>核心法規庫</a>
     <a href="#tools" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">③</span>實務檢核工具</a>
@@ -67,6 +68,74 @@
       <div class="bg-white/10 rounded-xl p-3"><p class="text-2xl font-bold">20日</p><p class="text-xs text-blue-100">受理與否通知</p></div>
       <div class="bg-white/10 rounded-xl p-3"><p class="text-2xl font-bold">2+2月</p><p class="text-xs text-blue-100">調查（含延長上限）</p></div>
       <div class="bg-white/10 rounded-xl p-3"><p class="text-2xl font-bold">30日</p><p class="text-xs text-blue-100">申復期間</p></div>
+    </div>
+  </section>
+
+  <!-- ================= 區塊零：引導處理器 ================= -->
+  <section id="guide" class="mb-16 scroll-mt-20" aria-labelledby="guide-title">
+    <h2 id="guide-title" class="text-2xl font-bold text-blue-950 mb-1">⓪ 引導處理器</h2>
+    <p class="text-slate-600 mb-5">依序回答案件情況，系統依附件法規產生本案處理清單。答案僅存在本機瀏覽器；請勿輸入任何可識別當事人的資料。</p>
+    <div class="grid lg:grid-cols-5 gap-5">
+      <form id="guideForm" class="lg:col-span-2 rounded-2xl bg-white border border-slate-200 shadow-sm p-5 space-y-5" onsubmit="return false">
+        <fieldset>
+          <legend class="font-bold text-blue-950 mb-2">1. 雙方身分關係</legend>
+          <div class="space-y-1 text-sm">
+            <label class="flex gap-2"><input type="radio" name="g_rel" value="campus" class="mt-1 accent-blue-700">一方為校長、教師、職員、工友或學生，另一方為學生</label>
+            <label class="flex gap-2"><input type="radio" name="g_rel" value="contract" class="mt-1 accent-blue-700">被害人為學生，行為人為約聘人員或外包人員（保全、清潔、維修等）</label>
+            <label class="flex gap-2"><input type="radio" name="g_rel" value="staff" class="mt-1 accent-blue-700">雙方皆為教職員工（無學生）</label>
+            <label class="flex gap-2"><input type="radio" name="g_rel" value="outsider" class="mt-1 accent-blue-700">被害人為學生，行為人為校外人士（房東、商家等）</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="font-bold text-blue-950 mb-2">2. 疑似事件類型</legend>
+          <div class="grid grid-cols-2 gap-1 text-sm">
+            <label class="flex gap-2"><input type="radio" name="g_type" value="assault" class="mt-1 accent-blue-700">性侵害</label>
+            <label class="flex gap-2"><input type="radio" name="g_type" value="harass" class="mt-1 accent-blue-700">性騷擾</label>
+            <label class="flex gap-2"><input type="radio" name="g_type" value="bully" class="mt-1 accent-blue-700">性霸凌</label>
+            <label class="flex gap-2"><input type="radio" name="g_type" value="ethics" class="mt-1 accent-blue-700">違反與性或性別有關之專業倫理</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="font-bold text-blue-950 mb-2">3. 被害人年齡</legend>
+          <div class="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+            <label class="flex gap-2"><input type="radio" name="g_age" value="minor" class="mt-1 accent-blue-700">未滿 18 歲</label>
+            <label class="flex gap-2"><input type="radio" name="g_age" value="adult" class="mt-1 accent-blue-700">已滿 18 歲</label>
+          </div>
+          <label id="g_consentWrap" class="mt-2 flex gap-2 text-sm" hidden><input type="checkbox" id="g_consent" class="mt-1 accent-blue-700">雙方皆滿 16 歲，且可確認為合意</label>
+        </fieldset>
+        <fieldset id="g_actorSet">
+          <legend class="font-bold text-blue-950 mb-2">4. 行為人身分</legend>
+          <div class="grid grid-cols-2 gap-1 text-sm">
+            <label class="flex gap-2"><input type="radio" name="g_actor" value="principal" class="mt-1 accent-blue-700">校長（現任或曾任）</label>
+            <label class="flex gap-2"><input type="radio" name="g_actor" value="teacher" class="mt-1 accent-blue-700">教師</label>
+            <label class="flex gap-2"><input type="radio" name="g_actor" value="worker" class="mt-1 accent-blue-700">職員、工友</label>
+            <label class="flex gap-2"><input type="radio" name="g_actor" value="student" class="mt-1 accent-blue-700">學生</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="font-bold text-blue-950 mb-2">5. 申請或檢舉情形</legend>
+          <div class="space-y-1 text-sm">
+            <label class="flex gap-2"><input type="radio" name="g_will" value="apply" class="mt-1 accent-blue-700">被害人（或法定代理人、實際照顧者）申請調查</label>
+            <label class="flex gap-2"><input type="radio" name="g_will" value="report" class="mt-1 accent-blue-700">他人檢舉</label>
+            <label class="flex gap-2"><input type="radio" name="g_will" value="refuse" class="mt-1 accent-blue-700">被害人不願申請調查或不願被通報</label>
+            <label class="flex gap-2"><input type="radio" name="g_will" value="settle" class="mt-1 accent-blue-700">雙方私下和解，或申請人撤回</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="font-bold text-blue-950 mb-2">6. 其他情況（可複選）</legend>
+          <div class="space-y-1 text-sm">
+            <label class="flex gap-2"><input type="checkbox" id="g_media" class="mt-1 accent-blue-700">已經媒體報導</label>
+            <label class="flex gap-2"><input type="checkbox" id="g_multi" class="mt-1 accent-blue-700">二人以上被害人或二人以上行為人</label>
+            <label class="flex gap-2"><input type="checkbox" id="g_cross" class="mt-1 accent-blue-700">雙方分屬不同學校，或行為人已轉校、離職</label>
+            <label class="flex gap-2"><input type="checkbox" id="g_sped" class="mt-1 accent-blue-700">當事人持有身心障礙證明或特殊教育學生鑑定證明</label>
+            <label class="flex gap-2"><input type="checkbox" id="g_stalk" class="mt-1 accent-blue-700">有反覆或持續跟蹤、盯梢、守候、尾隨等行為</label>
+          </div>
+        </fieldset>
+        <button type="button" id="g_reset" class="px-3 py-2 rounded-lg border border-slate-300 text-sm hover:bg-slate-50">重新填答</button>
+      </form>
+      <div class="lg:col-span-3 min-w-0">
+        <div id="guideOut" class="rounded-2xl bg-white border border-slate-200 shadow-sm p-5" aria-live="polite"></div>
+      </div>
     </div>
   </section>
 
@@ -267,7 +336,7 @@
       <p class="font-bold mb-2">📝 使用備註</p>
       <ol class="list-decimal pl-5 space-y-1">
         <li>各要點後括號內之條號，均出自上表附件；未標條號之文字為整理說明。</li>
-        <li>法規連結指向全國法規資料庫；QA 手冊、參考流程圖、處理流程表為附件文件，未提供網址。</li>
+        <li>法規連結指向全國法規資料庫；「📎 附件 PDF」為使用者提供之附件原檔，存放於 <a class="underline" href="https://github.com/dfleoyang-HLHS/sexevents/tree/claude/gifted-newton-dnd4zn/attachments" target="_blank" rel="noopener">GitHub 附件資料夾</a>。</li>
         <li>《校園性別事件調查專業人才庫設置及管理要點》未在附件中，相關內容僅依《校園性別事件防治準則》第22、23條整理。</li>
         <li>「校安通報」「關懷 e 起來」（<a class="underline" href="https://ecare.mohw.gov.tw/" target="_blank" rel="noopener">ecare.mohw.gov.tw</a>）之用語及網址出自附件參考流程圖、檢核表及 QA 手冊；疑似性侵害案件之校安通報依教育部「<a class="underline" href="https://edu.law.moe.gov.tw/LawContent.aspx?id=FL028684" target="_blank" rel="noopener">校園安全及災害事件通報作業要點</a>」（QA 第43題所附連結）。</li>
         <li>QA 手冊第75題法規依據欄寫「性平法第21條第1項」，經對照附件性平法條文，通報規定應為第22條第1項，本系統採第22條。</li>
@@ -286,6 +355,9 @@
 <script>
 /* ============ 法規來源（以使用者提供之附件為準） ============ */
 const MOJ = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=";
+/* 附件 PDF（存放於 GitHub repo 的 attachments 資料夾） */
+const GH = "https://github.com/dfleoyang-HLHS/sexevents/blob/claude/gifted-newton-dnd4zn/attachments/";
+const PDF = {"gee": ["01_性別平等教育法_1120816.pdf"], "geer": ["02_性別平等教育法施行細則_1130215.pdf"], "rule": ["03_校園性別事件防治準則_1130306.pdf"], "gew": ["04_性別平等工作法_1120816.pdf"], "sh": ["05_性騷擾防治法_1120816.pdf"], "st": ["06_跟蹤騷擾防制法_1101201.pdf"], "sa": ["07_性侵害犯罪防治法_1120215.pdf"], "cy": ["08_兒童及少年福利與權益保障法_1100120.pdf"], "fine": ["09_教育部處理違反性別平等教育法事件處理程序及裁罰基準_行政院公報1131122.pdf"], "qa": ["10_QA手冊附冊一附錄1_校園性別事件防治與處理參考流程QA_1140203.pdf"], "flow": ["11_QA手冊附冊二2-1_校園性別事件通報及調查處理程序參考流程圖_1140203.pdf"], "proc": ["12_QA手冊附冊二2-2_校園性別事件處理流程表及檢核表_1140203.pdf", "13_校園性別事件防治準則第30條流程圖_1140203.pdf"]};
 const LAW_REF = {
   gee:  {name:"性別平等教育法", ver:"民國112年08月16日修正", url:MOJ+"H0080067"},
   geer: {name:"性別平等教育法施行細則", ver:"民國113年02月15日修正", url:MOJ+"H0080068"},
@@ -304,10 +376,12 @@ const LAW_REF = {
 };
 function refLink(k, small){
   const r = LAW_REF[k];
-  if(r.doc) return `<span class="${small?"text-xs":"text-sm"} text-slate-500">📄 ${r.name.replace(/（.*）$/,"")}（附件文件，未提供網址）</span>`;
+  const cls = `relative inline-flex items-center gap-1 text-blue-700 underline underline-offset-2 hover:text-blue-900 ${small?"text-xs":"text-sm"}`;
+  const pdfs = (PDF[k]||[]).map(f=>`<a href="${GH+encodeURIComponent(f)}" target="_blank" rel="noopener" class="${cls}">📎 附件 PDF：${f.replace(/^\d+_/,"").replace(/\.pdf$/,"")}<span class="sr-only">（另開新視窗）</span></a>`).join(" ");
+  if(r.doc) return pdfs;
   const href = r.url || r.home || "https://law.moj.gov.tw/";
   const label = r.url ? `《${r.name}》全國法規資料庫原文` : (r.homeLabel || `全國法規資料庫（請搜尋「${r.name}」）`);
-  return `<a href="${href}" target="_blank" rel="noopener" class="relative inline-flex items-center gap-1 text-blue-700 underline underline-offset-2 hover:text-blue-900 ${small?"text-xs":"text-sm"}">🔗 ${label}<span class="sr-only">（另開新視窗）</span></a>`;
+  return `<span class="inline-flex flex-wrap gap-x-3 gap-y-1"><a href="${href}" target="_blank" rel="noopener" class="${cls}">🔗 ${label}<span class="sr-only">（另開新視窗）</span></a>${pdfs}</span>`;
 }
 function refNote(k){
   const r = LAW_REF[k];
@@ -790,7 +864,7 @@ function initNav(){
   const io = new IntersectionObserver(es=>es.forEach(en=>{
     if(en.isIntersecting) links.forEach(l=>{ const on = l.getAttribute("href")==="#"+en.target.id; l.classList.toggle("bg-blue-700",on); on?l.setAttribute("aria-current","true"):l.removeAttribute("aria-current"); });
   }),{rootMargin:"-40% 0px -55% 0px"});
-  ["flow","laws","tools","sources"].forEach(id=>io.observe(document.getElementById(id)));
+  ["guide","flow","laws","tools","sources"].forEach(id=>io.observe(document.getElementById(id)));
 }
 
 function renderSources(){
@@ -800,7 +874,132 @@ function renderSources(){
     <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${r.ver}</td>
     <td class="px-4 py-3 min-w-[12rem]">${refLink(k,true)}</td></tr>`;}).join("");
 }
-renderSources(); renderStages(); renderLaws(); initTools(); initNav();
+/* ============ 區塊零：引導處理器 ============ */
+const G_KEYS = ["g_rel","g_type","g_age","g_actor","g_will"], G_CHK = ["g_consent","g_media","g_multi","g_cross","g_sped","g_stalk"];
+function gVal(n){ const el=document.querySelector(`input[name=${n}]:checked`); return el?el.value:""; }
+function openQA(n){
+  const card = document.getElementById("qa"+n); if(!card) return;
+  $("#lawSearch").value=""; $("#lawSearch").dispatchEvent(new Event("input"));
+  $("#qaCat").value=""; $("#qaSearch").value=""; $("#qaSearch").dispatchEvent(new Event("input"));
+  const btn = document.querySelector(`[aria-controls=qa${n}]`);
+  btn.setAttribute("aria-expanded","true"); card.classList.add("open");
+  btn.scrollIntoView({behavior:"smooth",block:"center"}); btn.focus({preventScroll:true});
+}
+function renderGuide(){
+  const v = {rel:gVal("g_rel"), type:gVal("g_type"), age:gVal("g_age"), actor:gVal("g_actor"), will:gVal("g_will")};
+  G_CHK.forEach(id=>v[id.slice(2)]=$("#"+id).checked);
+  const campus = v.rel==="campus"||v.rel==="contract";
+  $("#g_actorSet").hidden = !campus;
+  if(v.rel==="contract"){ document.querySelectorAll("input[name=g_actor]").forEach(r=>r.checked = r.value==="worker"); v.actor="worker"; }
+  $("#g_consentWrap").hidden = !(v.type==="assault" && v.age==="minor");
+  const out = $("#guideOut");
+  if(!v.rel || !v.type || !v.age || (campus && !v.actor)){
+    out.innerHTML = `<p class="font-bold text-blue-950 mb-2">本案處理清單</p><p class="text-sm text-slate-600">請先回答第 1 至 3 題${campus?"及第 4 題":""}，系統會在這裡列出本案的通報、受理、調查與議處步驟，並附上法規依據與相關 QA。</p>
+      <ul class="mt-3 text-sm text-slate-500 list-disc pl-5 space-y-1"><li>判斷是否屬性平法之校園性別事件</li><li>24 小時內應完成的通報</li><li>調查小組組成與迴避</li><li>議處、申復與追蹤</li></ul>`;
+    return;
+  }
+  const S = {now:[], accept:[], inv:[], after:[]}, warn=[], qa=new Set();
+  const add=(k,t,ref,q)=>{ S[k].push([t,ref]); (q||[]).forEach(n=>qa.add(n)); };
+  const staffActor = v.actor==="teacher"||v.actor==="worker"||v.actor==="principal";
+  let verdict;
+  if(campus){
+    verdict = ["屬校園性別事件，適用性別平等教育法","bg-blue-100 text-blue-900", "事件之一方為校長、教職員工或學生，他方為學生（性平法第3條第3款）"+(v.rel==="contract"?"；約聘或外包人員於學校執行事務，依功能定義屬職員、工友（QA 第6題）":"")];
+    if(v.rel==="contract") qa.add(6);
+    // 立即
+    add("now","知悉者立即通報學校防治規定所定權責人員；由權責人員向學校主管機關通報（校安通報），至遲不得超過 24 小時。","性平法第22條第1項第1款",[14]);
+    if(v.type==="assault") add("now","疑似性侵害：向當地直轄市、縣（市）主管機關進行社政通報（關懷 e 起來），至遲不得超過 24 小時。","性侵害犯罪防治法第11條；性平法第22條第1項第2款",[20,43]);
+    if(v.age==="minor") add("now","被害人未滿 18 歲：進行社政通報（社會安全網－關懷 e 起來或家庭暴力及性侵害防治中心），至遲不得超過 24 小時。","兒少法第53條；性平法第22條第1項第2款",[75]);
+    if(v.age==="adult" && v.type==="harass") add("now","已滿 18 歲、非兒童少年之疑似性騷擾事件，無須進行社政通報；仍須完成校安通報。","參考流程圖",[]);
+    if(v.age==="adult" && (v.type==="bully"||v.type==="ethics")) add("now","社政通報依性侵害犯罪防治法、兒少法、身心障礙者權益保障法等相關法律判斷；當事人有身心障礙者，請確認是否應通報。","性平法第22條第1項第2款",[]);
+    if(v.type==="assault" && v.age==="minor" && v.consent) add("now","雙方皆滿 16 歲且合意者，不構成刑法第227條，無須依該條通報；但只要無法確認是否合意，或疑似違反任一方意願，仍應通報。","檢核表注意事項",[]);
+    if(v.will==="refuse") add("now","被害人不願被通報：法定通報不受當事人意願影響，仍須通報，可在通報單上註記被害人的意見或顧慮。","QA 第21題；性平法第22條",[21]);
+    add("now","啟動保護與協助：告知當事人權益及救濟途徑，依需求提供心理諮商、法律協助、社福資源轉介；必要時減低雙方互動、命行為人迴避，並報主管機關備查。","性平法第24、25條；準則第26–28條",[12]);
+    if(v.age==="minor") add("now","當事人未成年：通知其法定代理人或實際照顧者。","檢核表第二、九項；準則第24條",[24]);
+    if(v.actor==="teacher") add("now","行為人為教師：秘書單位通知教評會審議暫時停聘；有教師法第22條情事者，經教評會審議通過後免報主管機關核准，暫時停聘六個月以下並靜候調查。","參考流程圖；QA 第47題",[47]);
+    if(v.actor==="principal") add("now","行為人為校長：情節重大有必要時，得由學校主管機關於調查期間先行調整或停止其職務。","性平法第35條",[]);
+    add("now","不得私下調查：學校所屬人員不得以任何名義瞭解或調查案情，不得要求當事人提交自述或切結文件；任何人不得另設調查機制。","準則第24條第7款；性平法第22條第3項",[14]);
+    // 受理
+    if(v.actor==="principal") add("accept","行為人現為或曾為校長：應向行為發生時學校之主管機關申請調查或檢舉，由主管機關處理。","性平法第31條第1項；準則第11條",[]);
+    else add("accept","由行為人於行為發生時所屬之學校（事件管轄學校）受理；學務處或教導處收件後 3 日內交性平會。","準則第11、19條；性平法第33條第1項",[1,2]);
+    add("accept","接獲申請或檢舉後 20 日內，以書面通知申請人、被害人或檢舉人是否受理；不受理應敘明理由並告知 20 日內可申復。","性平法第32條；準則第21條",[1,2]);
+    if(v.will==="refuse") add("accept","被害人不願申請：不得要求簽署任何形式的不申請調查切結書；性平會可評估以檢舉案形式啟動調查，被害人日後仍可提出申請，不受時間限制。","QA 第12題；準則第18條第3項",[12]);
+    if(v.will==="settle") add("accept","私下和解不影響學校調查：曾和解仍應受理；申請人因和解撤回時，性平會得決議繼續調查，主管機關認情節重大者應命繼續調查。","QA 第8、9題；準則第24條第9款",[8,9]);
+    if(staffActor || v.multi) add("accept","行為人為校長或教職員工，或有二人以上被害人、行為人：性平會應評估並經會議決議以檢舉案形式啟動調查。","準則第18條第3項",[11,12]);
+    if(v.media) add("accept","經媒體報導：視同檢舉，學校應主動交性平會調查；被害人不願配合時仍應提供輔導協助，並指定媒體發言人。","準則第20條；參考流程圖",[11,33]);
+    if(v.cross) add("accept","分屬不同學校或行為人已轉校、離職：由事件管轄學校調查，並書面通知行為人現所屬學校派代表參與；調查不因行為人喪失原身分而中止。無管轄權者 7 個工作日內移送。","準則第12–16、29條",[3,72,73]);
+    // 調查
+    add("inv","調查小組 3 或 5 人：具性別平等意識、女性不少於 1/2、具調查專業素養之專家學者占 1/3 以上（人才庫）。","性平法第33條第3項；準則第22、23條",[15,27]);
+    if(staffActor) add("inv","行為人為校長或教職員工：應成立調查小組，且成員全部外聘；雙方權力不對等時避免對質。","性平法第33條第2項；準則第24條第3款",[]);
+    if(v.actor==="student") add("inv","雙方皆為學生時，高級中等以下學校的調查小組成員不應包含學生。","QA 第19題",[19]);
+    if(v.cross) add("inv","當事人分屬不同學校時，調查小組應有被害人現所屬學校之代表（被害人要求不通知且經性平會認定無必要者除外）。","性平法第33條第4項",[]);
+    if(v.sped) add("inv","當事人持有身心障礙或特教鑑定證明：調查小組成員應有具備特殊教育專業者。","準則第24條第2款",[17]);
+    if(v.age==="minor") add("inv","未成年當事人接受調查時，得由法定代理人或實際照顧者陪同。","準則第24條第1款",[24,26]);
+    add("inv","訪談得以錄音輔助、必要時錄影；當事人不得自行錄音；書面通知應載明不得私下聯繫或散布事件資訊。","準則第24條第6、11款；QA 第37題",[28,37]);
+    add("inv","受理後 2 個月內完成調查；必要時得延長 2 次、每次不逾 1 個月，並通知申請人、被害人、檢舉人及行為人。","性平法第36條第1項",[]);
+    // 議處
+    add("after","接獲調查報告後 2 個月內議處，並以書面通知申請人、被害人、檢舉人及行為人，一併提供調查報告、告知 30 日內申復。","性平法第36條第3項；準則第32條",[]);
+    add("after","懲處時應命行為人接受心理諮商與輔導，並得命其經被害人同意後道歉、接受 8 小時性平課程或其他符合教育目的之措施。","性平法第26條第2項",[57,58]);
+    if(staffActor) add("after","處理建議涉及改變行為人身分：學校檢附調查報告，通知行為人限期提出書面陳述意見（準則第30條流程）；議處前並應通知被害人陳述意見。","準則第30條",[49]);
+    if(staffActor) add("after","不服處理結果：申請人或被害人得逕向主管機關申復；行為人向學校申復時，學校應報請主管機關併案審議。","性平法第37條第1項但書；準則第33條",[59,61]);
+    if(v.actor==="student") add("after","雙方皆為學生且命道歉時，學校得善用修復式正義或其他輔導策略。","性平法第26條第7項",[]);
+    add("after","建立事件檔案並保存 25 年；行為人轉校時通報次一就讀或服務學校（學生於知悉後 1 個月內）；追蹤被害人輔導成效。","性平法第28條；準則第34、36條；檢核表第廿八至卅二項",[67,68]);
+    // 警示
+    warn.push("無正當理由未於 24 小時內通報：處新臺幣 3 萬元以上 15 萬元以下罰鍰（性平法第43條第1項）。");
+    if(staffActor) warn.push("行為人為校長或教職員工：調查小組成員必須全部外聘（性平法第33條第2項）。");
+    warn.push("所有參與處理人員負保密義務，洩密依刑法或相關法規處罰；對外文書以代號處理（準則第25條）。");
+  } else if(v.rel==="staff"){
+    verdict = ["非屬性平法之校園性別事件，適用性別平等工作法","bg-purple-100 text-purple-900","雙方皆為教職員工屬校園職場性騷擾，性平會不予受理（QA 第5題；性平法第3、32條）"];
+    qa.add(5);
+    add("now","學校（雇主）知悉時應採取立即有效之糾正及補救措施：避免再度發生、提供或轉介諮詢與心理諮商、進行調查、對行為人適當懲戒。","性別平等工作法第13條第2項",[5]);
+    add("now","雇主接獲被害人申訴時，應通知地方主管機關；經調查認定屬性騷擾者，並應將處理結果通知地方主管機關。","性別平等工作法第13條第4項",[]);
+    if(v.type==="assault") add("now","疑似性侵害：教育人員知悉時應於 24 小時內向當地主管機關通報。","性侵害犯罪防治法第11條",[]);
+    add("accept","依學校所訂職場性騷擾防治措施、申訴及懲戒規範處理（教育部114年1月9日臺教學(三)字第1130122346號函）。","QA 第5題",[5]);
+    add("after","公務人員、教育人員之申訴、救濟及處理程序，依各該人事法令之規定。","性別平等工作法第2條第3項",[]);
+    warn.push("本處理器的校園性別事件流程不適用於本案，請改依性別平等工作法及學校職場性騷擾防治規範辦理。");
+  } else {
+    verdict = ["非屬性平法之校園性別事件，依性騷擾防治法等處理","bg-pink-100 text-pink-900","行為人為校外人士，事件樣態非屬性平法適用範疇，性平會不予受理（QA 第7題）"];
+    qa.add(7);
+    if(v.type==="assault") add("now","疑似性侵害：教育人員知悉時應於 24 小時內向當地主管機關通報。","性侵害犯罪防治法第11條",[43]);
+    if(v.age==="minor") add("now","被害人未滿 18 歲：教育人員於執行業務時知悉兒少有第53條所列情形者，應於 24 小時內向主管機關通報，請依該條評估。","兒少法第53條",[]);
+    add("now","事件發生在學校場所且當時知悉：協助被害人申訴及保全證據，必要時協助通知警察機關到場，並檢討場所安全。","性騷擾防治法第7條第2項",[]);
+    add("now","依被害學生需求提供心理諮商與輔導等各類專業服務。","性平法第25條；QA 第7題",[7]);
+    add("accept","協助被害學生提出申訴：行為人有所屬單位者向該單位提出；行為人不明或無所屬單位者，向事件發生地警察機關提出。","性騷擾防治法第14條第3項",[7]);
+    warn.push("本處理器的校園性別事件流程不適用於本案，請依性騷擾防治法及學校性騷擾防治措施辦理。");
+  }
+  if(v.stalk) add("now","反覆或持續之跟蹤、盯梢、守候、尾隨等行為，可能構成跟蹤騷擾：協助被害人向警察機關報案，警察機關得核發書面告誡，二年內再犯得聲請保護令。","跟蹤騷擾防制法第3–5條",[]);
+
+  const sec = (title,key,color)=> S[key].length?`<div><p class="font-bold ${color} mb-2">${title}</p><ol class="space-y-2">${S[key].map((x,i)=>`<li class="flex gap-2 text-sm"><input type="checkbox" id="gc_${key}_${i}" class="mt-1 w-4 h-4 accent-blue-700 shrink-0"><label for="gc_${key}_${i}" class="min-w-0">${x[0]}<span class="block text-xs text-blue-800 mt-0.5">依據：${x[1]}</span></label></li>`).join("")}</ol></div>`:"";
+  const qaList=[...qa].sort((a,b)=>a-b);
+  out.innerHTML = `
+    <p class="font-bold text-blue-950 mb-2">本案處理清單</p>
+    <div class="rounded-xl ${verdict[1]} px-4 py-3 mb-4"><p class="font-bold">${verdict[0]}</p><p class="text-sm mt-1">${verdict[2]}</p></div>
+    ${warn.length?`<div role="alert" class="rounded-xl bg-red-600 text-white px-4 py-3 mb-4 text-sm space-y-1">${warn.map(w=>`<p>⚠️ ${w}</p>`).join("")}</div>`:""}
+    <div class="space-y-5">
+      ${sec("① 立即處理（知悉後 24 小時內）","now","text-red-700")}
+      ${sec("② 申請與受理","accept","text-amber-700")}
+      ${sec("③ 調查","inv","text-blue-700")}
+      ${sec("④ 議處、申復與追蹤","after","text-indigo-700")}
+    </div>
+    ${qaList.length?`<div class="mt-5"><p class="font-bold text-blue-950 mb-2">相關 QA（點選查看全文）</p><div class="flex flex-wrap gap-2">${qaList.map(n=>`<button type="button" class="g-qa px-2.5 py-1 rounded-full border border-blue-300 text-blue-800 text-xs hover:bg-blue-50" data-n="${n}">Q${n} ${esc(QA_ALL[n-1].q.slice(0,18))}${QA_ALL[n-1].q.length>18?"…":""}</button>`).join("")}</div></div>`:""}
+    <div class="mt-5 flex flex-wrap gap-2">
+      ${campus?`<a href="#tools" class="px-3 py-2 rounded-lg bg-blue-700 text-white text-sm hover:bg-blue-800">前往行政時效計算器與檢核表</a>`:""}
+      <a href="#flow" class="px-3 py-2 rounded-lg border border-slate-300 text-sm hover:bg-slate-50">查看五階段流程</a>
+    </div>
+    <p class="mt-4 text-xs text-slate-500">※ 本清單依附件法規及 QA 手冊產生，供行政參考；是否受理及事實認定，仍由性平會依法決定。清單上的勾選不會儲存。</p>`;
+  out.querySelectorAll(".g-qa").forEach(b=>b.addEventListener("click",()=>openQA(+b.dataset.n)));
+}
+function initGuide(){
+  G_KEYS.forEach(n=>{ const sv=store.get(n); if(sv){ const el=document.querySelector(`input[name=${n}][value="${sv}"]`); if(el) el.checked=true; } });
+  G_CHK.forEach(id=>{ if(store.get(id)==="1") $("#"+id).checked=true; });
+  $("#guideForm").addEventListener("change",()=>{
+    G_KEYS.forEach(n=>store.set(n,gVal(n))); G_CHK.forEach(id=>store.set(id,$("#"+id).checked?"1":"0"));
+    renderGuide();
+  });
+  $("#g_reset").addEventListener("click",()=>{ $("#guideForm").reset(); G_KEYS.concat(G_CHK).forEach(k=>store.set(k,"")); renderGuide(); });
+  renderGuide();
+}
+
+renderSources(); renderStages(); renderLaws(); initTools(); initNav(); initGuide();
 </script>
 </body>
 </html>
