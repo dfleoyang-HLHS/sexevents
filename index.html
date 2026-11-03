@@ -126,8 +126,9 @@
     <p class="text-slate-600 mb-4">點擊標題展開學校現場實務要點。</p>
 
     <div class="mb-6">
-      <label for="lawSearch" class="sr-only">搜尋法規要點</label>
-      <input id="lawSearch" type="search" placeholder="🔍 搜尋關鍵字，例如：通報、外聘、申復、未滿18歲…" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
+      <label for="lawSearch" class="sr-only">搜尋法規要點與 QA 問答</label>
+      <input id="lawSearch" type="search" placeholder="🔍 搜尋法規與 QA 問答，例如：通報、外聘、申復、和解、錄音…" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
+      <p id="lawSearchHint" class="mt-2 text-sm text-slate-600" aria-live="polite" hidden></p>
     </div>
 
     <h3 class="text-lg font-bold text-blue-950 mb-3">核心法規</h3>
@@ -643,7 +644,18 @@ function renderLaws(){
       card.querySelectorAll(".item").forEach(it=>it.classList.toggle("bg-yellow-50", !!q && it.textContent.includes(q)));
     });
     document.querySelectorAll(".law-row").forEach(r=>r.hidden = !!q && !r.dataset.text.includes(q));
+    // 同步搜尋 QA 問答
+    if(e.isTrusted) $("#qaCat").value = ""; $("#qaSearch").value = q;
+    $("#qaSearch").dispatchEvent(new Event("input"));
+    const nLaw = [...document.querySelectorAll(".law-card")].filter(c=>!c.hidden).length
+               + [...document.querySelectorAll(".law-row")].filter(r=>!r.hidden).length;
+    const nQa = [...document.querySelectorAll(".qa-card")].filter(c=>!c.hidden).length;
+    const hint = $("#lawSearchHint");
+    hint.hidden = !q;
+    hint.innerHTML = q ? `「${esc(q)}」：法規卡片與對照表 <strong>${nLaw}</strong> 項、QA 問答 <strong>${nQa}</strong> 題` + (nQa?`　<a href="#qaCount" class="text-blue-700 underline">跳至 QA 結果 ↓</a>`:"") : "";
   });
+  // QA 區搜尋框反向同步至開頭搜尋框
+  $("#qaSearch").addEventListener("input",e=>{ if(e.isTrusted){ $("#lawSearch").value = e.target.value; $("#lawSearch").dispatchEvent(new Event("input")); } });
 }
 
 /* ============ 區塊三：計算器 ============ */
