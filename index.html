@@ -127,7 +127,7 @@
 
     <div class="mb-6">
       <label for="lawSearch" class="sr-only">搜尋流程階段、法規要點與 QA 問答</label>
-      <input id="lawSearch" type="search" placeholder="🔍 搜尋流程、法規與 QA 問答，例如：通報、外聘、申復、和解、錄音…" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
+      <input id="lawSearch" type="search" placeholder="🔍 搜尋流程、法規與 QA 問答（國字、數字皆可），例如：24小時、第33條、和解…" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
       <p id="lawSearchHint" class="mt-2 text-sm text-slate-600" aria-live="polite" hidden></p>
     </div>
 
@@ -590,8 +590,26 @@ function accordion(law){
     </div></div>
   </div>`;
 }
-/* 比對時忽略空白（如「24 小時」與「24小時」視為相同） */
-const has = (text,q) => (text||"").replace(/\s+/g,"").includes((q||"").replace(/\s+/g,""));
+/* 搜尋比對：忽略空白；國字數字與阿拉伯數字視為相同（如「二十四小時」＝「24小時」、「第三十三條」＝「第33條」）；全形數字視同半形 */
+const CN_D = {"零":0,"〇":0,"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9};
+const CN_U = {"十":10,"百":100,"千":1000};
+function cnToNum(seq){
+  if(![...seq].some(ch=>ch in CN_U)) return [...seq].map(ch=>CN_D[ch]).join("");   // 如「一一四」→114
+  let total=0, num=0;
+  for(const ch of seq){ if(ch in CN_D) num=CN_D[ch]; else { total += (num||1)*CN_U[ch]; num=0; } }
+  return String(total+num);
+}
+const normCache = new Map();
+function norm(t){
+  t = t||""; if(normCache.has(t)) return normCache.get(t);
+  const r = t.replace(/\s+/g,"")
+             .replace(/[０-９]/g, d=>String.fromCharCode(d.charCodeAt(0)-0xFEE0))
+             .replace(/[零〇一二三四五六七八九十百千]+/g, cnToNum);
+  if(normCache.size<5000) normCache.set(t,r);
+  return r;
+}
+/* 原文比對或正規化後比對，任一符合即視為命中（避免「十四」搜不到「二十四」） */
+const has = (text,q) => { if(!q) return true; const raw=(text||"").replace(/\s+/g,""), rq=q.replace(/\s+/g,""); return raw.includes(rq) || norm(text).includes(norm(q)); };
 const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const para = t => esc(t).split("\n").map(l=>`<p class="mb-1">${l}</p>`).join("");
 function renderQA(){
