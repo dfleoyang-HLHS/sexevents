@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校園性平導航系統</title>
+<meta name="description" content="校園性平事件處理與法規導航系統：互動式處理流程、核心法規庫、實務檢核工具。">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<style>
+  :root { --brand:#1e40af; }
+  body { font-family: "Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif; background:#f8fafc; }
+  .skip-link{position:absolute;left:-9999px;top:0}
+  .skip-link:focus{left:1rem;top:1rem;z-index:100;background:#fff;padding:.5rem 1rem;border:2px solid var(--brand);border-radius:.5rem}
+  :focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+  .acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+  .acc-panel.open{grid-template-rows:1fr}
+  .acc-panel > div{overflow:hidden}
+  .acc-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .chev{transition:transform .2s}
+  @media (prefers-reduced-motion: reduce){ *{transition:none!important;scroll-behavior:auto!important} }
+  @media print{ aside,#mobileBar,.no-print{display:none!important} main{margin:0!important} .acc-panel{grid-template-rows:1fr!important} }
+</style>
+</head>
+<body class="text-slate-800 antialiased">
+<a href="#main" class="skip-link">跳至主要內容</a>
+
+<!-- 手機頂部列 -->
+<header id="mobileBar" class="lg:hidden sticky top-0 z-40 bg-blue-900 text-white flex items-center justify-between px-4 h-14 shadow">
+  <span class="font-bold">校園性平導航系統</span>
+  <button id="menuBtn" class="p-2 rounded hover:bg-blue-800" aria-controls="sidebar" aria-expanded="false" aria-label="開啟選單">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</header>
+
+<!-- 側邊欄 -->
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-blue-950 text-blue-50 transform -translate-x-full lg:translate-x-0 transition-transform flex flex-col" aria-label="主要導覽">
+  <div class="px-6 py-6 border-b border-blue-800">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-white/10 grid place-items-center" aria-hidden="true">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div>
+        <p class="font-bold leading-tight">校園性平事件處理<br>與法規導航系統</p>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 px-3 py-4 space-y-1">
+    <a href="#flow" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">①</span>互動式處理流程</a>
+    <a href="#laws" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">②</span>核心法規庫</a>
+    <a href="#tools" data-nav class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-800/70"><span aria-hidden="true">③</span>實務檢核工具</a>
+  </nav>
+  <div class="px-6 py-4 text-xs text-blue-200 border-t border-blue-800 leading-relaxed">
+    本系統為行政參考工具，不構成法律意見。實際處理請以<a class="underline" href="https://law.moj.gov.tw/" target="_blank" rel="noopener">全國法規資料庫</a>最新條文及主管機關函釋為準。
+  </div>
+</aside>
+<div id="overlay" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
+
+<main id="main" class="lg:ml-72 px-4 sm:px-6 lg:px-10 py-8 max-w-6xl" tabindex="-1">
+
+  <!-- 首頁橫幅 -->
+  <section class="mb-10 rounded-2xl bg-gradient-to-br from-blue-800 to-indigo-700 text-white p-6 sm:p-8 shadow">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">校園性平事件處理與法規導航系統</h1>
+    <p class="text-blue-100 max-w-3xl">協助學校行政人員、教師、學生及家長快速掌握「性平事件處理流程」、「核心法規要點」與「行政時效」。</p>
+    <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+      <div class="bg-white/10 rounded-xl p-3"><p class="text-2xl font-bold">24h</p><p class="text-xs text-blue-100">知悉後通報</p></div>
+      <div class="bg-white/10 rounded-xl p-3"><p class="text-2xl font-bold">20日</p><p class="text-xs text-blue-100">受理與否通知</p></div>
+      <div class="bg-white/10 rounded-xl p-3"><p class="text-2xl font-bold">2+2月</p><p class="text-xs text-blue-100">調查（含延長上限）</p></div>
+      <div class="bg-white/10 rounded-xl p-3"><p class="text-2xl font-bold">30日</p><p class="text-xs text-blue-100">申復期間</p></div>
+    </div>
+  </section>
+
+  <!-- ================= 區塊一 ================= -->
+  <section id="flow" class="mb-16 scroll-mt-20" aria-labelledby="flow-title">
+    <h2 id="flow-title" class="text-2xl font-bold text-blue-950 mb-1">① 互動式處理流程（SOP 五大階段）</h2>
+    <p class="text-slate-600 mb-6">點選各階段查看時效限制與核心重點。</p>
+
+    <div role="tablist" aria-label="處理流程階段" id="stageTabs" class="flex gap-2 overflow-x-auto pb-2 mb-4"></div>
+    <div id="stagePanels"></div>
+
+    <!-- 時間軸總覽 -->
+    <h3 class="text-lg font-bold text-blue-950 mt-10 mb-4">時間軸總覽</h3>
+    <ol id="timeline" class="relative border-l-4 border-blue-200 ml-3 space-y-6"></ol>
+  </section>
+
+  <!-- ================= 區塊二 ================= -->
+  <section id="laws" class="mb-16 scroll-mt-20" aria-labelledby="laws-title">
+    <h2 id="laws-title" class="text-2xl font-bold text-blue-950 mb-1">② 核心法規與要點庫</h2>
+    <p class="text-slate-600 mb-4">點擊標題展開學校現場實務要點。</p>
+
+    <div class="mb-6">
+      <label for="lawSearch" class="sr-only">搜尋法規要點</label>
+      <input id="lawSearch" type="search" placeholder="🔍 搜尋關鍵字，例如：通報、外聘、申復、未滿18歲…" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none">
+    </div>
+
+    <h3 class="text-lg font-bold text-blue-950 mb-3">核心法規</h3>
+    <div id="coreLaws" class="space-y-3 mb-10"></div>
+
+    <h3 class="text-lg font-bold text-blue-950 mb-3">交叉適用法規對照表</h3>
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm mb-3">
+      <table class="min-w-full text-sm">
+        <caption class="sr-only">交叉適用法規對照表</caption>
+        <thead class="bg-slate-100 text-slate-700">
+          <tr><th scope="col" class="text-left px-4 py-3">法規</th><th scope="col" class="text-left px-4 py-3">適用情境（標籤）</th><th scope="col" class="text-left px-4 py-3">學校實務重點</th></tr>
+        </thead>
+        <tbody id="crossTable" class="divide-y divide-slate-100"></tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-500 mb-10">※《性騷擾防治法》第1條第2項：依事件發生場域及當事人身分關係，性別平等教育法及性別平等工作法別有規定者，適用各該法律。</p>
+
+    <h3 class="text-lg font-bold text-blue-950 mb-3">行政指引</h3>
+    <div id="guideLaws" class="space-y-3"></div>
+  </section>
+
+  <!-- ================= 區塊三 ================= -->
+  <section id="tools" class="mb-16 scroll-mt-20" aria-labelledby="tools-title">
+    <h2 id="tools-title" class="text-2xl font-bold text-blue-950 mb-1">③ 學校實務操作 3 大防線與動態檢核</h2>
+    <p class="text-slate-600 mb-6">每一位承辦人都應牢記的三道防線。</p>
+
+    <div class="grid md:grid-cols-3 gap-4 mb-10">
+      <div role="note" class="rounded-xl border-l-8 border-red-600 bg-red-50 p-5">
+        <p class="text-red-800 font-bold text-lg mb-2">🔒 防線一：絕對保密義務</p>
+        <ul class="list-disc pl-5 space-y-1 text-sm text-red-900">
+          <li>當事人、檢舉人、證人之姓名及足以辨識身分之資料一律保密，公文書<strong>代號化</strong>處理。</li>
+          <li>調查處理中及完成後皆不得揭露（性平法第27條）。</li>
+          <li>違反者學校可處 1 萬至 15 萬元罰鍰；公務員洩密並可能觸犯<strong>刑法</strong>洩密罪責。</li>
+        </ul>
+      </div>
+      <div role="note" class="rounded-xl border-l-8 border-amber-500 bg-amber-50 p-5">
+        <p class="text-amber-800 font-bold text-lg mb-2">⚖️ 防線二：權勢迴避原則</p>
+        <ul class="list-disc pl-5 space-y-1 text-sm text-amber-900">
+          <li>行為人為校長或教職員工時，調查小組成員<strong>全部外聘</strong>。</li>
+          <li>與當事人有利害關係者應自行迴避。</li>
+          <li>不得運用不對等權力影響被害人受教權、工作權或申請調查（性平法第24條）。</li>
+        </ul>
+      </div>
+      <div role="note" class="rounded-xl border-l-8 border-emerald-600 bg-emerald-50 p-5">
+        <p class="text-emerald-800 font-bold text-lg mb-2">🛡️ 防線三：被害人權益保障</p>
+        <ul class="list-disc pl-5 space-y-1 text-sm text-emerald-900">
+          <li>課業調整、彈性出缺勤、調班、<strong>免除特定課堂</strong>等彈性協助措施。</li>
+          <li>心理諮商輔導、法律諮詢、社會福利資源轉介。</li>
+          <li>不得因申請調查或檢舉而給予不利處分（性平法第31條）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 動態計算器 -->
+    <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-5 sm:p-6">
+      <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div>
+          <h3 class="text-xl font-bold text-blue-950">⏱️ 行政時效動態計算器</h3>
+          <p class="text-sm text-slate-600">輸入關鍵日期，系統自動推算期限並顯示剩餘天數；勾選完成事項以追蹤進度。資料僅儲存在本機瀏覽器。</p>
+        </div>
+        <div class="flex gap-2 no-print">
+          <button id="printBtn" class="px-3 py-2 rounded-lg border border-slate-300 text-sm hover:bg-slate-50">列印</button>
+          <button id="resetBtn" class="px-3 py-2 rounded-lg border border-red-300 text-red-700 text-sm hover:bg-red-50">清除資料</button>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label for="caseCode" class="block text-sm font-medium mb-1">案件代號（請勿填寫真實姓名）</label>
+        <input id="caseCode" data-store type="text" placeholder="例：114-性平-001" class="w-full sm:w-80 rounded-lg border border-slate-300 px-3 py-2">
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div><label for="d_know" class="block text-sm font-medium mb-1">知悉時間</label><input id="d_know" data-store type="datetime-local" class="w-full rounded-lg border border-slate-300 px-3 py-2"></div>
+        <div><label for="d_recv" class="block text-sm font-medium mb-1">收件日（申請/檢舉）</label><input id="d_recv" data-store type="date" class="w-full rounded-lg border border-slate-300 px-3 py-2"></div>
+        <div><label for="d_accept" class="block text-sm font-medium mb-1">受理日</label><input id="d_accept" data-store type="date" class="w-full rounded-lg border border-slate-300 px-3 py-2"></div>
+        <div>
+          <label for="ext" class="block text-sm font-medium mb-1">調查延長次數</label>
+          <select id="ext" data-store class="w-full rounded-lg border border-slate-300 px-3 py-2">
+            <option value="0">未延長（2 個月）</option><option value="1">延長 1 次（3 個月）</option><option value="2">延長 2 次（4 個月，上限）</option>
+          </select>
+        </div>
+        <div><label for="d_report" class="block text-sm font-medium mb-1">接獲調查報告日</label><input id="d_report" data-store type="date" class="w-full rounded-lg border border-slate-300 px-3 py-2"></div>
+        <div><label for="d_notice" class="block text-sm font-medium mb-1">當事人收到處理結果書面日</label><input id="d_notice" data-store type="date" class="w-full rounded-lg border border-slate-300 px-3 py-2"></div>
+      </div>
+
+      <div class="mb-3">
+        <div class="flex justify-between text-sm mb-1"><span class="font-medium">整體進度</span><span id="progressText">0 / 0</span></div>
+        <div class="h-3 bg-slate-200 rounded-full overflow-hidden" role="progressbar" aria-labelledby="progressText" aria-valuemin="0" aria-valuemax="100" id="progressBar"><div id="progressFill" class="h-full bg-blue-600 transition-all" style="width:0%"></div></div>
+      </div>
+
+      <ul id="checklist" class="divide-y divide-slate-100"></ul>
+      <p class="text-xs text-slate-500 mt-4">※ 期間計算採「始日不計入」原則（行政程序法第48條準用民法），期間末日為假日者依規定順延，本工具未自動順延，請自行確認。月份以曆月推算。</p>
+    </div>
+  </section>
+
+  <footer class="border-t border-slate-200 pt-6 pb-10 text-xs text-slate-500 leading-relaxed">
+    <p>資料依據：《性別平等教育法》、《校園性別事件防治準則》、《性騷擾防治法》（112.08.16 修正）、《跟蹤騷擾防制法》（110.12.01 公布）、《性侵害犯罪防治法》（112.02.15 修正）、《兒童及少年福利與權益保障法》、《教育部處理違反性別平等教育法事件處理程序及裁罰基準》（行政院公報 113.11.22）等。</p>
+    <p class="mt-1">本系統僅供行政參考，不取代法規原文、主管機關函釋與專業法律意見。</p>
+  </footer>
+</main>
+
+<script>
+/* ============ 資料 ============ */
+const STAGES = [
+  { id:1, title:"通報與危機處理", limit:"知悉後 24 小時內", color:"red",
+    points:[
+      ["校安通報","依學校防治規定所定權責，向學校權責人員通報，並於教育部校園安全暨災害防救通報處理中心（校安通報）完成通報。"],
+      ["社政通報（關懷E起來）","涉及未滿18歲或疑似性侵害者，依兒少法第53條、性侵害犯罪防治法第11條向直轄市、縣（市）主管機關通報，至遲不得超過24小時。"],
+      ["啟動緊急保護","確保被害人人身安全，必要時隔離雙方、通知家長/監護人、轉介醫療及心理資源、協助報警。"],
+      ["絕對禁止","❌ 不得私下調查、❌ 不得私下和解、❌ 不得要求當事人對質或協調。學校未交由性平會調查處理或任何人另設調查機制，可處 1–15 萬元罰鍰。"]
+    ],
+    warn:"延誤通報：學校校長、教師、職員或工友無正當理由未於24小時內通報，處新臺幣 3 萬元以上 15 萬元以下罰鍰（性平法第43條第1項）。"
+  },
+  { id:2, title:"申請與受理審查", limit:"收件後 20 日內", color:"amber",
+    points:[
+      ["3 日內移送","學校收到申請調查或檢舉後，應於 3 日內交由性別平等教育委員會（性平會）調查處理。"],
+      ["20 日內受理決議","性平會（或其指派之審查小組）應於收件後 20 日內決議是否受理。"],
+      ["書面通知","以書面通知申請人或檢舉人是否受理；不受理者應敘明理由。"],
+      ["不受理之申復","申請人或檢舉人對不受理有異議者，得於收到通知次日起 20 日內，以書面具明理由向學校申復。"]
+    ]
+  },
+  { id:3, title:"調查與審議", limit:"受理後 2 個月內（最長延長至 4 個月）", color:"blue",
+    points:[
+      ["組成調查小組","受理後 20 日內組成調查小組，成員 3 人或 5 人。"],
+      ["組成比例","女性人數占成員總數二分之一以上；具校園性別事件調查專業素養之專家學者占三分之一以上（得自人才庫遴聘）。"],
+      ["全部外聘","行為人為校長或教職員工時，調查小組成員應全部外聘，以落實權勢迴避。"],
+      ["調查程序","隔離訪談、避免當事人對質、全程錄音（影）；應給予雙方陳述意見及答辯機會，並避免重複詢問。"],
+      ["期限","調查應於受理後 2 個月內完成；必要時得延長，延長次數不得逾 2 次、每次不得逾 1 個月，並應通知當事人。"]
+    ]
+  },
+  { id:4, title:"審議、懲處與處置", limit:"接獲調查報告後 2 個月內", color:"indigo",
+    points:[
+      ["性平會審議","性平會審議調查報告所認定之事實，並提出懲處及處置建議。"],
+      ["權責單位議處","學校應於接獲調查報告後 2 個月內，自行或移送權責單位（教評會／考績會／學生獎懲委員會等）依法議處。"],
+      ["處置措施","經學校查證屬實者，得命行為人接受心理諮商與輔導、接受 8 小時之性別平等教育相關課程或其他符合教育目的之措施。"],
+      ["書面通知","以書面將處理結果及調查報告通知當事人（被害人、行為人），並告知救濟方式與期限。"]
+    ]
+  },
+  { id:5, title:"救濟與申復", limit:"收到處理結果書面後 30 日內", color:"emerald",
+    points:[
+      ["提出申復","當事人對處理結果不服者，得於收到書面通知次日起 30 日內，以書面具明理由向學校申復，以 1 次為限。"],
+      ["申復審議","學校接獲申復後應組成申復審議小組，於 30 日內作成決定，並以書面通知申復人。"],
+      ["重新調查","申復有理由者，由性平會重新調查；原調查小組成員不得參與重新調查。"],
+      ["後續救濟","依身分別提起行政救濟：教師→教師申訴／再申訴、訴願或行政訴訟；公務員→公務人員保障法程序；學生→學生申訴、訴願或行政訴訟。"]
+    ]
+  }
+];
+
+const CORE_LAWS = [
+  { name:"性別平等教育法", tag:"母法",
+    items:[
+      ["校園性別事件定義","包括校園性侵害、性騷擾、性霸凌，以及校長或教職員工違反與性或性別有關之專業倫理行為，且事件一方為學校校長、教師、職員、工友或學生，他方為學生者。"],
+      ["性平會法定職掌","統整學校性別平等教育資源、規劃課程與活動、研擬防治規定、調查處理校園性別事件、規劃安全校園空間、推動社區性平教育等。"],
+      ["24 小時通報責任","校長、教職員工知悉疑似校園性別事件，應於 24 小時內通報；未通報者依裁罰基準處 3–15 萬元（延誤越久越重，一年內二案以上延誤，自第二案起每次 15 萬元）。"],
+      ["隱匿證據罰則","偽造、變造、湮滅或隱匿他人所犯校園性騷擾、性霸凌或專業倫理事件之證據者，處 3–15 萬元罰鍰。"],
+      ["禁止不利處分","不得因申請調查、檢舉或協助他人而予以不利處分或措施（第31條）。"]
+    ]
+  },
+  { name:"校園性別事件防治準則", tag:"授權命令",
+    items:[
+      ["師生專業倫理","教師與未成年學生發展親密關係，屬違反專業倫理；教職員工於執行教學、指導、訓練、評鑑、管理、輔導或提供學生服務時，在與性或性別有關之互動上，應避免與學生發展有違專業倫理之情感或性關係。"],
+      ["調查小組組成","3 或 5 人；女性占 1/2 以上；專家學者占 1/3 以上；行為人為校長或教職員工時，調查小組成員全部外聘。"],
+      ["校園危險空間盤點","學校應定期檢視校園空間與設施使用安全（如照明、死角、監視設備、廁所與更衣室），並將檢視結果納入改善。"],
+      ["證據保全與保密","調查時應注意證據保全；當事人及檢舉人之姓名或其他足以辨識身分之資料應予保密。"]
+    ]
+  },
+  { name:"性別平等教育法施行細則", tag:"施行細則",
+    items:[
+      ["管轄權重疊釐清","事件發生時行為人與被害人分屬不同學校時，原則由行為人事件發生時所屬學校負責調查處理，被害人所屬學校應派代表參與調查。"],
+      ["身分變動","行為人或被害人於事件發生後身分轉換（轉學、離職、畢業）時，仍應依規定釐清管轄並持續調查處理。"]
+    ]
+  }
+];
+
+const CROSS = [
+  ["性別平等工作法","職場・教職員工對等","教職員工之間（同為受僱者）發生之性騷擾，依本法處理；雇主負防治與糾正補救義務。","bg-purple-100 text-purple-800"],
+  ["性騷擾防治法","校外人士・非學生身分","行為人不具學生或教職員工身分（如校外人士）時適用；學校應協助被害人申訴、保全證據，必要時通知警察機關到場。申訴時行為人不明或無所屬單位時，向事件發生地警察機關提出。","bg-pink-100 text-pink-800"],
+  ["跟蹤騷擾防制法","持續性盯梢尾隨","對特定人「反覆或持續」違反意願且與性或性別有關之監視、跟蹤、盯梢、守候、尾隨、干擾、追求等行為，使之心生畏怖；由警察機關受理並核發書面告誡，二年內再犯得聲請保護令。","bg-orange-100 text-orange-800"],
+  ["性侵害犯罪防治法","強制啟動社政・司法","教育人員知有疑似性侵害犯罪情事，應立即向主管機關通報，至遲不得超過 24 小時；兒童或心智障礙被害人偵審中由專業人士協助詢問，減少重複陳述；媒體不得揭露被害人身分。","bg-red-100 text-red-800"],
+  ["兒童及少年福利與權益保障法","未滿18歲保護","未滿 18 歲之兒少遭受第49條各款行為等情形，教育人員應立即通報，至遲不得超過 24 小時；無正當理由未通報處 6 千元以上 6 萬元以下罰鍰（第100條）。","bg-sky-100 text-sky-800"]
+];
+
+const GUIDES = [
+  { name:"教育部處理違反性別平等教育法事件處理程序及裁罰基準", tag:"裁罰基準（113.11.22）",
+    items:[
+      ["適用範圍","教育部主管學校違反性平法之裁處；教育部知悉後得組成調查小組實地稽查、蒐證。"],
+      ["延誤通報裁罰級距","延誤未滿48小時：3 萬元｜48–未滿96小時：6 萬元｜96–未滿168小時：9 萬元｜168小時以上：12 萬元｜168小時以上且情節重大：15 萬元。"],
+      ["得從輕之情形","到校服務次日起 2 個月內發生延誤、延誤未滿 168 小時期間處理緊急事件，或已進行社政通報／已由其他單位介入處理者，得依最低額度（3 萬元）裁罰。"],
+      ["學校違規","未交由性平會調查或另設調查機制、未保密、揭露當事人身分、未對行為人追蹤輔導、對申請人不利處分等：1–15 萬元。"],
+      ["行為人不配合","無正當理由拒絕接受處置或規避、妨礙、拒絕配合調查：第 1 次 1 萬、第 2 次 3 萬、第 3 次以上每次 5 萬元，按次處罰至配合為止。"],
+      ["救濟","對裁處不服者，得自裁處書送達翌日起 30 日內提起訴願。"]
+    ]
+  },
+  { name:"校園性別事件調查專業人才庫設置及管理要點", tag:"人才庫",
+    items:[
+      ["用途","提供學校及主管機關遴聘具校園性別事件調查專業素養之專家學者，以符合調查小組「專家學者 1/3 以上」及「全部外聘」之需求。"],
+      ["實務提醒","遴聘前確認人才庫成員資格有效、無利害關係並完成迴避聲明。"]
+    ]
+  },
+  { name:"各校自訂之《校園性別事件防治規定》", tag:"校內規章",
+    items:[
+      ["法定義務","學校應依防治準則訂定防治規定並公告周知；未訂定者可處 1–10 萬元罰鍰。"],
+      ["內容建議","明定通報權責人員、受理窗口、聯絡方式、處理流程、保密規範、被害人協助措施與申復程序，並納入學生手冊及教職員工手冊。"]
+    ]
+  }
+];
+
+const CHECKS = [
+  { id:"c_report", label:"已完成通報（校安＋社政）", base:"d_know", add:{h:24}, rule:"知悉後 24 小時" },
+  { id:"c_protect", label:"已啟動緊急保護與協助措施", base:"d_know", add:{h:24}, rule:"知悉後立即" },
+  { id:"c_transfer", label:"已將申請/檢舉移送性平會", base:"d_recv", add:{d:3}, rule:"收件後 3 日" },
+  { id:"c_accept", label:"已發出受理（或不受理）書面通知", base:"d_recv", add:{d:20}, rule:"收件後 20 日" },
+  { id:"c_team", label:"已組成調查小組（比例、外聘已確認）", base:"d_accept", add:{d:20}, rule:"受理後 20 日" },
+  { id:"c_invest", label:"已完成調查報告", base:"d_accept", add:{m:2, ext:true}, rule:"受理後 2 個月（可延長）" },
+  { id:"c_punish", label:"已完成議處並書面通知雙方", base:"d_report", add:{m:2}, rule:"接獲報告後 2 個月" },
+  { id:"c_appeal", label:"申復期間屆滿／已處理申復", base:"d_notice", add:{d:30}, rule:"收到書面後 30 日" }
+];
+
+/* ============ 工具 ============ */
+const $ = s => document.querySelector(s);
+const store = {
+  get(k){ try{ return localStorage.getItem("gev_"+k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem("gev_"+k,v); }catch(e){} },
+  clear(){ try{ Object.keys(localStorage).filter(k=>k.startsWith("gev_")).forEach(k=>localStorage.removeItem(k)); }catch(e){} }
+};
+const COLORS = {
+  red:["bg-red-600","text-red-700","bg-red-50","border-red-200"],
+  amber:["bg-amber-500","text-amber-700","bg-amber-50","border-amber-200"],
+  blue:["bg-blue-600","text-blue-700","bg-blue-50","border-blue-200"],
+  indigo:["bg-indigo-600","text-indigo-700","bg-indigo-50","border-indigo-200"],
+  emerald:["bg-emerald-600","text-emerald-700","bg-emerald-50","border-emerald-200"]
+};
+
+/* ============ 區塊一：Tabs + Timeline ============ */
+function renderStages(){
+  const tabs = $("#stageTabs"), panels = $("#stagePanels"), tl = $("#timeline");
+  STAGES.forEach((s,i)=>{
+    const c = COLORS[s.color];
+    tabs.insertAdjacentHTML("beforeend",
+      `<button role="tab" id="tab-${s.id}" aria-controls="panel-${s.id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}"
+        class="stage-tab shrink-0 px-4 py-2 rounded-full border text-sm font-medium transition">
+        第${"一二三四五"[i]}階段・${s.title}</button>`);
+    panels.insertAdjacentHTML("beforeend",
+      `<div role="tabpanel" id="panel-${s.id}" aria-labelledby="tab-${s.id}" ${i===0?"":"hidden"} tabindex="0"
+        class="rounded-2xl bg-white border ${c[3]} shadow-sm p-5 sm:p-6">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="${c[0]} text-white w-10 h-10 rounded-full grid place-items-center font-bold" aria-hidden="true">${s.id}</span>
+          <h3 class="text-xl font-bold">第${"一二三四五"[i]}階段：${s.title}</h3>
+          <span class="${c[2]} ${c[1]} border ${c[3]} px-3 py-1 rounded-full text-sm font-semibold">⏰ 時效：${s.limit}</span>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          ${s.points.map(p=>`<div class="rounded-xl ${c[2]} p-4"><p class="font-semibold ${c[1]} mb-1">${p[0]}</p><p class="text-sm leading-relaxed">${p[1]}</p></div>`).join("")}
+        </div>
+        ${s.warn?`<div role="alert" class="mt-4 rounded-xl bg-red-600 text-white p-4 text-sm font-medium">⚠️ ${s.warn}</div>`:""}
+        <div class="mt-5 flex justify-between no-print">
+          <button class="stage-prev px-4 py-2 rounded-lg border text-sm ${i===0?"invisible":""}" data-to="${i-1}">← 上一階段</button>
+          <button class="stage-next px-4 py-2 rounded-lg ${c[0]} text-white text-sm ${i===STAGES.length-1?"invisible":""}" data-to="${i+1}">下一階段 →</button>
+        </div>
+      </div>`);
+    tl.insertAdjacentHTML("beforeend",
+      `<li class="ml-6">
+        <span class="absolute -left-[14px] ${c[0]} text-white w-6 h-6 rounded-full grid place-items-center text-xs font-bold ring-4 ring-white" aria-hidden="true">${s.id}</span>
+        <button class="tl-jump text-left w-full rounded-xl bg-white border border-slate-200 p-4 hover:shadow-md transition" data-to="${i}">
+          <p class="font-bold">${s.title}</p>
+          <p class="text-sm ${c[1]} font-semibold">${s.limit}</p>
+          <p class="text-sm text-slate-600 mt-1">${s.points.map(p=>p[0]).join("・")}</p>
+        </button>
+      </li>`);
+  });
+  const allTabs = [...document.querySelectorAll(".stage-tab")];
+  function select(i, focus){
+    allTabs.forEach((t,j)=>{
+      const on = j===i, c = COLORS[STAGES[j].color];
+      t.setAttribute("aria-selected", on); t.tabIndex = on?0:-1;
+      t.className = `stage-tab shrink-0 px-4 py-2 rounded-full border text-sm font-medium transition ${on?c[0]+" text-white border-transparent":"bg-white text-slate-700 border-slate-300 hover:bg-slate-50"}`;
+      document.getElementById("panel-"+STAGES[j].id).hidden = !on;
+    });
+    if(focus) allTabs[i].focus();
+  }
+  allTabs.forEach((t,i)=>{
+    t.addEventListener("click",()=>select(i));
+    t.addEventListener("keydown",e=>{
+      if(e.key==="ArrowRight"){e.preventDefault();select((i+1)%allTabs.length,true);}
+      if(e.key==="ArrowLeft"){e.preventDefault();select((i-1+allTabs.length)%allTabs.length,true);}
+      if(e.key==="Home"){e.preventDefault();select(0,true);}
+      if(e.key==="End"){e.preventDefault();select(allTabs.length-1,true);}
+    });
+  });
+  document.querySelectorAll(".stage-prev,.stage-next,.tl-jump").forEach(b=>b.addEventListener("click",()=>{
+    select(+b.dataset.to, true);
+    $("#stageTabs").scrollIntoView({behavior:"smooth",block:"start"});
+  }));
+  select(0);
+}
+
+/* ============ 區塊二：Accordion ============ */
+let accId = 0;
+function accordion(law){
+  const id = "acc"+(accId++);
+  return `<div class="law-card rounded-xl bg-white border border-slate-200 shadow-sm" data-text="${(law.name+law.items.flat().join("")).replace(/"/g,"")}">
+    <h4><button class="acc-btn w-full flex items-center justify-between gap-3 text-left px-5 py-4" aria-expanded="false" aria-controls="${id}">
+      <span class="flex flex-wrap items-center gap-2"><span class="font-bold text-blue-950">《${law.name}》</span>
+      <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">${law.tag}</span></span>
+      <svg class="chev w-5 h-5 shrink-0 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button></h4>
+    <div id="${id}" class="acc-panel"><div>
+      <dl class="px-5 pb-5 space-y-3 border-t border-slate-100 pt-4">
+        ${law.items.map(it=>`<div class="item"><dt class="font-semibold text-slate-900">▸ ${it[0]}</dt><dd class="text-sm text-slate-700 leading-relaxed pl-4">${it[1]}</dd></div>`).join("")}
+      </dl>
+    </div></div>
+  </div>`;
+}
+function renderLaws(){
+  $("#coreLaws").innerHTML = CORE_LAWS.map(accordion).join("");
+  $("#guideLaws").innerHTML = GUIDES.map(accordion).join("");
+  $("#crossTable").innerHTML = CROSS.map(r=>`<tr class="law-row align-top" data-text="${r.join("")}">
+    <th scope="row" class="text-left px-4 py-3 font-semibold text-blue-950 whitespace-nowrap">《${r[0]}》</th>
+    <td class="px-4 py-3"><span class="inline-block ${r[3]} px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap">${r[1]}</span></td>
+    <td class="px-4 py-3 text-slate-700 leading-relaxed min-w-[16rem]">${r[2]}</td></tr>`).join("");
+  document.querySelectorAll(".acc-btn").forEach(b=>b.addEventListener("click",()=>{
+    const open = b.getAttribute("aria-expanded")!=="true";
+    b.setAttribute("aria-expanded",open);
+    document.getElementById(b.getAttribute("aria-controls")).classList.toggle("open",open);
+  }));
+  $("#lawSearch").addEventListener("input",e=>{
+    const q = e.target.value.trim();
+    document.querySelectorAll(".law-card").forEach(card=>{
+      const hit = !q || card.dataset.text.includes(q);
+      card.hidden = !hit;
+      const btn = card.querySelector(".acc-btn");
+      if(q && hit){ btn.setAttribute("aria-expanded","true"); document.getElementById(btn.getAttribute("aria-controls")).classList.add("open"); }
+      card.querySelectorAll(".item").forEach(it=>it.classList.toggle("bg-yellow-50", !!q && it.textContent.includes(q)));
+    });
+    document.querySelectorAll(".law-row").forEach(r=>r.hidden = !!q && !r.dataset.text.includes(q));
+  });
+}
+
+/* ============ 區塊三：計算器 ============ */
+function parseInput(id){
+  const v = $("#"+id).value; if(!v) return null;
+  return id==="d_know" ? new Date(v) : new Date(v+"T23:59:59");
+}
+function deadline(c){
+  const base = parseInput(c.base); if(!base) return null;
+  const d = new Date(base);
+  if(c.add.h) d.setHours(d.getHours()+c.add.h);
+  if(c.add.d) d.setDate(d.getDate()+c.add.d);          // 始日不計入：起算日 + N 日 = 末日
+  if(c.add.m){
+    const m = c.add.m + (c.add.ext ? +$("#ext").value : 0);
+    const day = d.getDate(); d.setDate(1); d.setMonth(d.getMonth()+m);
+    const last = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
+    d.setDate(Math.min(day,last));
+  }
+  return d;
+}
+const fmt = d => d.toLocaleString("zh-TW",{year:"numeric",month:"2-digit",day:"2-digit",weekday:"short",...(d.getHours()===23&&d.getMinutes()===59?{}:{hour:"2-digit",minute:"2-digit"})});
+
+function renderChecklist(){
+  const ul = $("#checklist"); ul.innerHTML = "";
+  let done = 0;
+  const now = new Date();
+  CHECKS.forEach(c=>{
+    const checked = store.get(c.id)==="1"; if(checked) done++;
+    const dl = deadline(c);
+    let badge = `<span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600">待輸入日期</span>`, due = "";
+    if(dl){
+      due = `期限：${fmt(dl)}`;
+      const ms = dl - now, days = Math.ceil(ms/86400000), hrs = Math.ceil(ms/3600000);
+      if(checked) badge = `<span class="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-800">✔ 已完成</span>`;
+      else if(ms < 0) badge = `<span class="text-xs px-2 py-1 rounded-full bg-red-600 text-white">已逾期 ${Math.abs(days)||1} 日</span>`;
+      else if(c.add.h) badge = `<span class="text-xs px-2 py-1 rounded-full ${hrs<=6?"bg-red-100 text-red-800":"bg-amber-100 text-amber-800"}">剩 ${hrs} 小時</span>`;
+      else badge = `<span class="text-xs px-2 py-1 rounded-full ${days<=3?"bg-red-100 text-red-800":days<=7?"bg-amber-100 text-amber-800":"bg-blue-100 text-blue-800"}">剩 ${days} 日</span>`;
+    }
+    ul.insertAdjacentHTML("beforeend",`<li class="py-3 flex flex-wrap sm:flex-nowrap items-center gap-3">
+      <input type="checkbox" id="${c.id}" ${checked?"checked":""} class="w-5 h-5 accent-blue-600 shrink-0">
+      <label for="${c.id}" class="flex-1 min-w-0 cursor-pointer">
+        <span class="font-medium ${checked?"line-through text-slate-400":""}">${c.label}</span>
+        <span class="block text-xs text-slate-500">${c.rule}${due?"｜"+due:""}</span>
+      </label>${badge}</li>`);
+  });
+  const pct = Math.round(done/CHECKS.length*100);
+  $("#progressFill").style.width = pct+"%";
+  $("#progressBar").setAttribute("aria-valuenow",pct);
+  $("#progressText").textContent = `${done} / ${CHECKS.length}（${pct}%）`;
+  CHECKS.forEach(c=>$("#"+c.id).addEventListener("change",e=>{ store.set(c.id, e.target.checked?"1":"0"); renderChecklist(); }));
+}
+function initTools(){
+  document.querySelectorAll("[data-store]").forEach(el=>{
+    const v = store.get(el.id); if(v!==null) el.value = v;
+    el.addEventListener("input",()=>{ store.set(el.id, el.value); renderChecklist(); });
+    el.addEventListener("change",()=>{ store.set(el.id, el.value); renderChecklist(); });
+  });
+  $("#resetBtn").addEventListener("click",()=>{
+    if(!confirm("確定清除本機儲存的所有日期與勾選紀錄？")) return;
+    store.clear(); document.querySelectorAll("[data-store]").forEach(el=>el.value = el.tagName==="SELECT"?"0":""); renderChecklist();
+  });
+  $("#printBtn").addEventListener("click",()=>window.print());
+  renderChecklist();
+  setInterval(renderChecklist, 60000);
+}
+
+/* ============ 導覽 ============ */
+function initNav(){
+  const sb = $("#sidebar"), ov = $("#overlay"), btn = $("#menuBtn");
+  const toggle = open => { sb.classList.toggle("-translate-x-full",!open); ov.classList.toggle("hidden",!open); btn.setAttribute("aria-expanded",open); };
+  btn.addEventListener("click",()=>toggle(sb.classList.contains("-translate-x-full")));
+  ov.addEventListener("click",()=>toggle(false));
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") toggle(false); });
+  document.querySelectorAll("[data-nav]").forEach(a=>a.addEventListener("click",()=>{ if(window.innerWidth<1024) toggle(false); }));
+  const links = [...document.querySelectorAll(".nav-link")];
+  const io = new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting) links.forEach(l=>{ const on = l.getAttribute("href")==="#"+en.target.id; l.classList.toggle("bg-blue-700",on); on?l.setAttribute("aria-current","true"):l.removeAttribute("aria-current"); });
+  }),{rootMargin:"-40% 0px -55% 0px"});
+  ["flow","laws","tools"].forEach(id=>io.observe(document.getElementById(id)));
+}
+
+renderStages(); renderLaws(); initTools(); initNav();
+</script>
+</body>
+</html>
